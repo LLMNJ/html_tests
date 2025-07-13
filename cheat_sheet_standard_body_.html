@@ -19,15 +19,24 @@
     .mobile-label { display: none; }
     @media (max-width: 576px) {
       #example, #example thead, #example tbody, #example th, #example td { font-size: 12px; }
-      #example th:nth-child(1), #example td:nth-child(1),  /* Rank */
-      #example th:nth-child(2), #example td:nth-child(2) { /* Position */
+      #example th:nth-child(1), #example td:nth-child(1),
+      #example th:nth-child(2), #example td:nth-child(2) {
         max-width: 50px;
         width: 1%;
         padding-left: 4px;
         padding-right: 4px;
         white-space: nowrap;
       }
-      #example th:nth-child(4), #example td:nth-child(4) { /* Team */
+      #example th:nth-child(3), #example td:nth-child(3) {
+        max-width: 130px;
+        width: 1%;
+        padding-left: 4px;
+        padding-right: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      #example th:nth-child(4), #example td:nth-child(4) {
         max-width: 90px;
         width: 1%;
         padding-left: 4px;
