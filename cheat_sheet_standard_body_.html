@@ -21,16 +21,18 @@
       #example { table-layout: fixed; width: 100%; }
       #example th, #example td { font-size: 12px; padding: 2px; }
       #example th:nth-child(1), #example td:nth-child(1) {
-        max-width: 30px; width: 8%; white-space: nowrap;
+        width: 8%; max-width: 30px; white-space: nowrap;
       }
       #example th:nth-child(2), #example td:nth-child(2) {
-        max-width: 35px; width: 10%; white-space: nowrap;
+        width: 10%; max-width: 35px; white-space: nowrap;
       }
       #example th:nth-child(3), #example td:nth-child(3) {
-        max-width: 90px; width: 35%; word-wrap: break-word; white-space: normal;
+        width: 37%; max-width: 100px;
+        word-wrap: break-word; white-space: normal;
       }
       #example th:nth-child(4), #example td:nth-child(4) {
-        max-width: 70px; width: 25%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        width: 30%; max-width: 70px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
       }
       .desktop-label { display: none; }
       .mobile-label { display: inline; }
