@@ -10,7 +10,14 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
   <style>
     body, table { font-family: 'Archivo', sans-serif; }
+    .table-responsive { overflow: visible; }
     #example th, #example td { text-align: center; }
+    #example th {
+      position: sticky;
+      top: 0;
+      background-color: #f8f9fa;
+      z-index: 2;
+    }
     #example a { color: #0d6efd; text-decoration: none; }
     #example a:hover { text-decoration: underline; }
     #example thead input, #example thead select { width: 100%; box-sizing: border-box; text-align: center; }
