@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,15 +13,15 @@
     body, table { font-family: 'Archivo', sans-serif; }
     .table-responsive { overflow: visible; }
     #example th, #example td { text-align: center; }
-    #example th {
+    #example thead th {
       position: sticky;
       top: 0;
       background-color: #f8f9fa;
       z-index: 2;
     }
+    #example .filter-row input, #example .filter-row select { width: 100%; box-sizing: border-box; text-align: center; }
     #example a { color: #0d6efd; text-decoration: none; }
     #example a:hover { text-decoration: underline; }
-    #example thead input, #example thead select { width: 100%; box-sizing: border-box; text-align: center; }
     .dataTables_filter { display: none; }
     .desktop-label { display: inline; }
     .mobile-label { display: none; }
@@ -54,14 +55,14 @@
           <th>Name</th>
           <th>Team</th>
         </tr>
-        <tr class="filters">
-          <th></th>
-          <th></th>
-          <th><input type="text" class="form-control form-control-sm text-center" placeholder="Filter"></th>
-          <th></th>
-        </tr>
       </thead>
       <tbody>
+        <tr class="filter-row">
+          <td></td>
+          <td></td>
+          <td><input type="text" class="form-control form-control-sm text-center" placeholder="Filter"></td>
+          <td></td>
+        </tr>
 <tr>
   <td>  1</td>
   <td>RB</td>
@@ -3086,18 +3087,11 @@
         buttons: [{ extend: "csvHtml5", text: "Export to CSV", filename: "pff_standard_cheat_sheet" }],
         paging: false, ordering: true, info: false, orderCellsTop: true
       });
-      // text filter for Name (column 2)
-      $("#example thead tr.filters th").each(function(i) {
-        if (i === 2) {
-          var $inp = $("input", this);
-          if ($inp.length) {
-            $inp.on("keyup change", function() {
-              table.column(i).search(this.value).draw();
-            });
-          }
-        }
+      // name filter input (column 2)
+      $(".filter-row input").on("keyup change", function() {
+        table.column(2).search(this.value).draw();
       });
-      // column dropdowns for Position & Team
+      // dropdowns for position and team
       function addDropdown(colIndex, placeholder) {
         var col = table.column(colIndex);
         var vals = col.data().map(function(d) { return $("<div>").html(d).text(); }).toArray();
@@ -3105,10 +3099,10 @@
         var sel = $("<select class=\"form-select form-select-sm text-center\"></select>");
         sel.append($("<option>").val("").text(placeholder));
         $.each(vals, function(_, v) { sel.append($("<option>").val(v).text(v)); });
-        sel.appendTo($("#example thead tr.filters th").eq(colIndex));
         sel.on("change", function() {
           col.search(this.value ? "^" + this.value + "$" : "", true, false).draw();
         });
+        $("#example .filter-row td").eq(colIndex).append(sel);
       }
       addDropdown(1, "Filter");
       addDropdown(3, "Filter");
