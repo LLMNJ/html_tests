@@ -35,6 +35,7 @@
   </style>
 </head>
 <body class="p-4">
+  <div id="last-updated" class="mb-2"><strong>Last Updated:</strong> <span id="last-updated-time"></span></div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <thead class="table-light">
@@ -49,19 +50,19 @@
           <th>Injury</th>
           <th>Status</th>
         </tr>
+        <tr class="filter-row">
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><input type="text" class="form-control form-control-sm text-center" placeholder="Filter Name"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
-        <tr class="filter-row">
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><input type="text" class="form-control form-control-sm text-center" placeholder="Filter Name"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
 <tr>
   <td data-order="1">1</td>
   <td data-order="1">  1</td>
@@ -3888,47 +3889,88 @@
         return isNaN(n) ? Number.POSITIVE_INFINITY : n;
       });
     };
+    function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+    function formatET(d){
+      var tz = "America/New_York";
+      var wd = new Intl.DateTimeFormat("en-US",{weekday:"short",timeZone:tz}).format(d);
+      var mo = new Intl.DateTimeFormat("en-US",{month:"2-digit",timeZone:tz}).format(d);
+      var da = new Intl.DateTimeFormat("en-US",{day:"2-digit",timeZone:tz}).format(d);
+      var hm = new Intl.DateTimeFormat("en-US",{hour:"2-digit",minute:"2-digit",hour12:true,timeZone:tz}).format(d).toUpperCase();
+      return wd + " " + mo + "/" + da + " " + hm;
+    }
+    document.getElementById("last-updated-time").textContent = formatET(new Date());
     $(document).ready(function() {
       var table = $("#example").DataTable({
         dom: "B t",
         autoWidth: false,
         order: [[0, "asc"], [1, "asc"]],
+        orderCellsTop: true,
+        buttons: [
+          { extend: "csvHtml5", text: "Export to CSV", filename: "weekly_fantasy_rankings_2025_week_1" }
+        ],
         columnDefs: [
           { targets: 0, orderDataType: "dom-data-order" },
           { targets: 6, orderDataType: "dom-data-order" }
         ],
-        buttons: [{ extend: "csvHtml5", text: "Export to CSV", filename: "weekly_fantasy_rankings_2025_week_1" }],
-        paging: false, ordering: true, info: false, orderCellsTop: true
+        paging: false, ordering: true, info: false
       });
       function addTextInput(colIndex, placeholder) {
         var input = $('<input type="text" class="form-control form-control-sm text-center" placeholder="'+placeholder+'">');
         input.on("keyup change", function() {
           table.column(colIndex).search(this.value).draw();
         });
-        $("#example .filter-row td").eq(colIndex).append(input);
+        $("#example thead tr.filter-row th").eq(colIndex).empty().append(input);
       }
-      function addDropdown(colIndex, placeholder) {
+      function addDropdown(colIndex, placeholder, sorter) {
         var col = table.column(colIndex);
-        var vals = col.data().map(function(d) { return $("<div>").html(d).text(); }).toArray();
-        vals = Array.from(new Set(vals.filter(function(x){return x && x.trim() !== "";}))).sort();
+        var texts = col.data().map(function(d){ return $("<div>").html(d).text(); }).toArray();
+        var vals = Array.from(new Set(texts.filter(function(x){return x && x.trim() !== "";})));
+        if (typeof sorter === "function") { vals.sort(sorter); } else { vals.sort(); }
         var sel = $('<select class="form-select form-select-sm text-center"></select>');
         sel.append($("<option>").val("").text(placeholder));
         $.each(vals, function(_, v) { sel.append($("<option>").val(v).text(v)); });
         sel.on("change", function() {
-          var esc = this.value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+          var esc = escapeRegex(this.value);
           col.search(this.value ? "^" + esc + "$" : "", true, false).draw();
         });
-        $("#example .filter-row td").eq(colIndex).append(sel);
+        $("#example thead tr.filter-row th").eq(colIndex).empty().append(sel);
       }
-      $(".filter-row input").first().on("keyup change", function() {
+      function addDropdownByOrder(colIndex, placeholder) {
+        var nodes = table.column(colIndex).nodes();
+        var seen = {};
+        var items = [];
+        nodes.each(function(td){
+          var txt = $("<div>").html($(td).html()).text();
+          if (!txt || !txt.trim()) return;
+          if (seen[txt]) return;
+          seen[txt] = true;
+          var ord = $(td).data("order");
+          var n = (ord===undefined||ord===null||ord==="") ? Number.POSITIVE_INFINITY : parseFloat(ord);
+          items.push({text: txt, order: (isNaN(n)?Number.POSITIVE_INFINITY:n)});
+        });
+        items.sort(function(a,b){ return a.order - b.order; });
+        var sel = $('<select class="form-select form-select-sm text-center"></select>');
+        sel.append($("<option>").val("").text(placeholder));
+        items.forEach(function(it){ sel.append($("<option>").val(it.text).text(it.text)); });
+        sel.on("change", function(){
+          var esc = escapeRegex(this.value);
+          table.column(colIndex).search(this.value ? "^"+esc+"$" : "", true, false).draw();
+        });
+        $("#example thead tr.filter-row th").eq(colIndex).empty().append(sel);
+      }
+      $("#example thead tr.filter-row th").eq(3).find("input").on("keyup change", function(){
         table.column(3).search(this.value).draw();
       });
-      addDropdown(2, "Filter");
-      addDropdown(4, "Filter");
-      addDropdown(5, "Filter");
-      addTextInput(6, "Filter");
-      addDropdown(7, "Filter");
-      addDropdown(8, "Filter");
+      addDropdown(2, "Filter", null);
+      addDropdown(4, "Filter", null);
+      addDropdown(5, "Filter", function(a,b){
+        var aa = a.replace(/^@/,"").toLowerCase();
+        var bb = b.replace(/^@/,"").toLowerCase();
+        if (aa < bb) return -1; if (aa > bb) return 1; return a < b ? -1 : (a > b ? 1 : 0);
+      });
+      addDropdownByOrder(6, "Filter");
+      addDropdown(7, "Filter", null);
+      addDropdown(8, "Filter", null);
     });
   </script>
 </body>
