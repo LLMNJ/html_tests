@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Weekly Fantasy Rankings 2025 Week 1</title>
   <link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
   <style>
@@ -16,7 +16,17 @@
     #example { table-layout: fixed; width: 100%; }
     #example th, #example td { text-align: center; padding: 0.35rem 0.35rem; font-size: 14px; }
     #example thead th { position: sticky; top: 0; background-color: #f8f9fa; z-index: 2; }
-    #example thead .form-select, #example thead .form-control { width: 100%; box-sizing: border-box; padding: 0.15rem 0.3rem; height: calc(1.5em + 0.5rem); font-size: 12px; text-align: center; }
+    /* Filter row layout: keep controls inside the cells */
+    #example thead tr.filter-row th { padding: 4px 4px !important; }
+    #example thead tr.filter-row th * { box-sizing: border-box; }
+    #example thead .form-control { width: 100%; min-width: 0; padding: 0.2rem 0.35rem; height: 28px; font-size: 12px; }
+    #example thead .filter-dd { width: 100%; }
+    #example thead .filter-dd .btn {
+      display: block; width: 100%; max-width: 100%;
+      padding: 0.2rem 0.5rem; height: 28px; font-size: 12px; line-height: 1.1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #example thead .filter-dd .dropdown-toggle::after { transform: scale(0.9); }
     #example a { color: #0d6efd; text-decoration: none; }
     #example a:hover { text-decoration: underline; }
     .dataTables_filter { display: none; }
@@ -24,8 +34,6 @@
     .mobile-label { display: none; }
     .filter-dd .dropdown-menu { min-width: 200px; max-height: 260px; overflow: auto; }
     .filter-dd .form-check { margin-bottom: 4px; }
-    /* Desktop: make filter buttons fill the column for clean alignment */
-    .filter-dd .btn { width: 100%; }
     /* Mobile: let remaining columns expand; hide chosen cols; compact filters */
     @media (max-width: 576px) {
       #example { table-layout: auto; }
@@ -36,7 +44,8 @@
       #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) { display: none; }
       #example th:nth-child(9), #example td:nth-child(9), #example thead tr.filter-row th:nth-child(9) { display: none; }
       #example th, #example td { font-size: 11px; padding: 2px; }
-      .filter-dd .btn { font-size: 11px; padding: 0.2rem 0.35rem; width: auto !important; }
+      /* On phones, let buttons auto-size but never overflow */
+      #example thead .filter-dd .btn { width: auto !important; max-width: 100%; font-size: 11px; padding: 0.2rem 0.35rem; }
       .desktop-label { display: none; }
       .mobile-label { display: inline; }
     }
@@ -51,7 +60,7 @@
   </style>
 </head>
 <body class="p-4">
-  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Mon 09/01 08:55 PM</div>
+  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Mon 09/01 09:05 PM</div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <colgroup>
@@ -3910,13 +3919,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
-    function labelForSelection(arr){ if(!arr.length) return "All"; if(arr.length<=3) return arr.join(", "); return arr.length + " selected"; }
-    function setBtnText(id){ $("#"+id).text("Filter"); }  // always show compact label on all screens
+    function dtExportText(data){ try { return $("<div>").html(data).text().trim(); } catch(e){ return (data || "").toString().trim(); } }
     $.fn.dataTable.ext.order["dom-data-order"] = function (settings, col) {
       return this.api().column(col, {order:"index"}).nodes().map(function(td){
         var v = $(td).data("order");
         if (v === undefined || v === null || v === "") { v = $(td).text(); }
-        if (v === undefined || v === null || (v+"").trim() === "") return Number.POSITIVE_INFINITY;
+        if ((v+"").trim() === "") return Number.POSITIVE_INFINITY;
         var n = parseFloat(v);
         return isNaN(n) ? Number.POSITIVE_INFINITY : n;
       });
@@ -3938,60 +3946,44 @@
       return wd;
     }
     function bucketOrderIndex(b){ var m={"Thu Night":1,"Fri":2,"Sat":3,"Sun Early":4,"Sun Late":5,"Sun Night":6,"Sun Other":7,"Mon Night":8}; return (b in m)?m[b]:999; }
-    function dtExportText(data){ try { return $("<div>").html(data).text().trim(); } catch(e){ return (data || "").toString().trim(); } }
     $(document).ready(function() {
       var table = $("#example").DataTable({
-        dom: "B t",
-        autoWidth: false,
-        order: [[0, "asc"], [1, "asc"]],
-        orderCellsTop: true,
+        dom: "B t", autoWidth: false, order: [[0,"asc"],[1,"asc"]], orderCellsTop: true,
         buttons: [
-          { extend: "copyHtml5",
-title: "Weekly Fantasy Rankings 2025 Week 1",
-exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
-          { extend: "csvHtml5",
-title: "Weekly Fantasy Rankings 2025 Week 1",
-filename: "weekly_fantasy_rankings_2025_week_1",
-exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
-          { extend: "excelHtml5",
-title: "Weekly Fantasy Rankings 2025 Week 1",
-filename: "weekly_fantasy_rankings_2025_week_1",
-exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
-          { extend: "print",
-title: "Weekly Fantasy Rankings 2025 Week 1",
-messageTop: function(){ var el=document.getElementById("last-updated-block"); return el?el.textContent:""; }, exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
-          { text: "Reset Filters", action: function () {
+          { extend: "copyHtml5",  
+title:"Weekly Fantasy Rankings 2025 Week 1",
+exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { extend: "csvHtml5",   
+title:"Weekly Fantasy Rankings 2025 Week 1",
+filename:"weekly_fantasy_rankings_2025_week_1",
+exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { extend: "excelHtml5", 
+title:"Weekly Fantasy Rankings 2025 Week 1",
+filename:"weekly_fantasy_rankings_2025_week_1",
+exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { extend: "print",      
+title:"Weekly Fantasy Rankings 2025 Week 1",
+messageTop:function(){var el=document.getElementById("last-updated-block");return el?el.textContent:"";}, exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { text:"Reset Filters", action:function(){
               $("[data-key='name']").val("");
               selected.pos.clear(); selected.team.clear(); selected.opp.clear(); selected.inj.clear(); selected.stat.clear(); selected.start.clear();
               $(".filter-dd input[type=checkbox]").prop("checked", false);
-              setBtnText("btn-pos"); setBtnText("btn-team"); setBtnText("btn-opp");
-              setBtnText("btn-start"); setBtnText("btn-inj"); setBtnText("btn-stat");
-              table.search("").columns().search("");
-              table.draw();
-              localStorage.removeItem(stateKey);
-              window.history.replaceState(null, "", window.location.pathname);
+              table.search("").columns().search(""); table.draw();
+              localStorage.removeItem(stateKey); window.history.replaceState(null,"",window.location.pathname);
             }
           }
         ],
-        columnDefs: [
-          { targets: 0, orderDataType: "dom-data-order" },
-          { targets: 6, orderDataType: "dom-data-order" },
-          { targets: 5, type: "opp" }
-        ],
-        paging: false, ordering: true, info: false
+        columnDefs: [ { targets:0, orderDataType:"dom-data-order" }, { targets:6, orderDataType:"dom-data-order" }, { targets:5, type:"opp" } ],
+        paging:false, ordering:true, info:false
       });
 
-      var stateKey = "DT_state_example";
-      var selected = { pos:new Set(), team:new Set(), opp:new Set(), start:new Set(), inj:new Set(), stat:new Set() };
-      function writeStateToURL(s){ var p=new URLSearchParams(); if(s.name)p.set("name",s.name); if(s.pos.length)p.set("pos",s.pos.join("|")); if(s.team.length)p.set("team",s.team.join("|")); if(s.opp.length)p.set("opp",s.opp.join("|")); if(s.start.length)p.set("start",s.start.join("|")); if(s.inj.length)p.set("inj",s.inj.join("|")); if(s.stat.length)p.set("stat",s.stat.join("|")); var q=p.toString(); var url=q?(window.location.pathname+"?"+q):window.location.pathname; window.history.replaceState(null,"",url); }
-      function readStateFromURL(){ var p=new URLSearchParams(window.location.search); var s={}; if(p.has("name"))s.name=p.get("name"); ["pos","team","opp","start","inj","stat"].forEach(function(k){ if(p.has(k)) s[k]=p.get(k).split("|").filter(Boolean); }); return s; }
+      var stateKey="DT_state_example";
+      var selected={ pos:new Set(), team:new Set(), opp:new Set(), start:new Set(), inj:new Set(), stat:new Set() };
+      function writeStateToURL(s){ var p=new URLSearchParams(); if(s.name)p.set("name",s.name); ["pos","team","opp","start","inj","stat"].forEach(function(k){ if(s[k]&&s[k].length)p.set(k,s[k].join("|")); }); var q=p.toString(); var url=q?(window.location.pathname+"?"+q):window.location.pathname; window.history.replaceState(null,"",url); }
+      function readStateFromURL(){ var p=new URLSearchParams(window.location.search); var s={}; if(p.has("name"))s.name=p.get("name"); ["pos","team","opp","start","inj","stat"].forEach(function(k){ if(p.has(k))s[k]=p.get(k).split("|").filter(Boolean); }); return s; }
       function writeStateToStorage(s){ try{ localStorage.setItem(stateKey, JSON.stringify(s||{})); }catch(e){} }
       function readStateFromStorage(){ try{ return JSON.parse(localStorage.getItem(stateKey)||"{}")||{}; }catch(e){ return {}; } }
-      function currentState(){ return {
-        name: ($("[data-key='name']").val()||"").trim(),
-        pos: Array.from(selected.pos), team: Array.from(selected.team), opp: Array.from(selected.opp),
-        start: Array.from(selected.start), inj: Array.from(selected.inj), stat: Array.from(selected.stat)
-      }; }
+      function currentState(){ return { name:($("[data-key='name']").val()||"").trim(), pos:Array.from(selected.pos), team:Array.from(selected.team), opp:Array.from(selected.opp), start:Array.from(selected.start), inj:Array.from(selected.inj), stat:Array.from(selected.stat) }; }
       function persist(){ var s=currentState(); writeStateToStorage(s); writeStateToURL(s); }
       function applyFilters(){
         table.column(3).search(($("[data-key='name']").val()||""));
@@ -3999,104 +3991,72 @@ messageTop: function(){ var el=document.getElementById("last-updated-block"); re
         table.column(4).search(Array.from(selected.team).map(escapeRegex).join("|"), true, false);
         table.column(7).search(Array.from(selected.inj).map(escapeRegex).join("|"), true, false);
         table.column(8).search(Array.from(selected.stat).map(escapeRegex).join("|"), true, false);
-        table.draw();
-        persist();
+        table.draw(); persist();
       }
-      /* Start bucket + Opponent custom filters */
+      /* Custom filters for Start buckets and Opponent (ignoring "@") */
       $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
         if (settings.nTable !== document.getElementById("example")) return true;
         if (selected.start.size){
-          var tdS = table.column(6).nodes()[dataIndex];
-          var sec = $(tdS).data("order");
-          if (sec !== undefined && sec !== null && sec !== ""){
-            var b = bucketFromEpoch(sec);
-            if (!selected.start.has(b)) return false;
-          }
+          var tdS = table.column(6).nodes()[dataIndex]; var sec=$(tdS).data("order");
+          if (sec!==undefined && sec!==null && sec!==""){ var b=bucketFromEpoch(sec); if(!selected.start.has(b)) return false; }
         }
         if (selected.opp.size){
           var tdO = table.column(5).nodes()[dataIndex];
           var txt = $(tdO).text().trim().replace(/^@/,"").toLowerCase();
-          var ok = false; var arr = Array.from(selected.opp);
-          for (var i=0; i<arr.length; i++){ if (arr[i].toLowerCase() === txt){ ok = true; break; } }
-          if (!ok) return false;
+          var ok=false; selected.opp.forEach(function(v){ if(v.toLowerCase()===txt) ok=true; });
+          if(!ok) return false;
         }
         return true;
       });
       function collectTextsForColumn(idx, normalize){
         var texts = table.column(idx).data().map(function(d){ return $("<div>").html(d).text(); }).toArray();
-        var seen = {}; var out = [];
-        texts.forEach(function(t){
-          if(!t) return; var v = normalize?normalize(t):t; v=v.trim(); if(!v) return; if(seen[v]) return; seen[v]=true; out.push(v);
-        });
-        return out;
+        var seen={}; var out=[]; texts.forEach(function(t){ if(!t) return; var v=normalize?normalize(t):t; v=v.trim(); if(!v||seen[v]) return; seen[v]=1; out.push(v); }); return out;
       }
-      function buildCheckboxDropdown(colIndex, idBtn, _baseLabel, idMenu, values, sortFn){
-        var wrap = $('<div class="dropdown filter-dd"></div>');
-        var btn  = $('<button id="'+idBtn+'" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Filter</button>');
-        var menu = $('<div id="'+idMenu+'" class="dropdown-menu p-2"></div>');
-        var vals = values || [];
-        if (sortFn) vals.sort(sortFn); else vals.sort();
-        vals.forEach(function(v){
-          var safe = v.replace(/\s+/g,"_");
-          var row = $('<div class="form-check"></div>');
-          var cb  = $('<input class="form-check-input" type="checkbox" id="'+idMenu+'_'+safe+'" value="'+v+'">');
-          var lb  = $('<label class="form-check-label" for="'+idMenu+'_'+safe+'">'+v+'</label>');
-          row.append(cb).append(lb); menu.append(row);
-        });
-        wrap.append(btn).append(menu);
-        $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
+      function buildCheckboxDropdown(colIndex, idBtn, idMenu, values, sortFn){
+        var wrap=$('<div class="dropdown filter-dd"></div>');
+        var btn =$('<button id="'+idBtn+'" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Filter</button>');
+        var menu=$('<div id="'+idMenu+'" class="dropdown-menu p-2"></div>');
+        var vals=values||[]; if (sortFn) vals.sort(sortFn); else vals.sort();
+        vals.forEach(function(v){ var safe=v.replace(/\s+/g,"_"); var row=$('<div class="form-check"></div>'); var cb=$('<input class="form-check-input" type="checkbox" id="'+idMenu+'_'+safe+'" value="'+v+'">'); var lb=$('<label class="form-check-label" for="'+idMenu+'_'+safe+'">'+v+'</label>'); row.append(cb).append(lb); menu.append(row); });
+        wrap.append(btn).append(menu); $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
         menu.on("change","input[type=checkbox]", function(){
-          var arr = menu.find("input:checked").map(function(){return this.value;}).get();
-          if (idBtn==="btn-pos") { selected.pos = new Set(arr); }
-          else if (idBtn==="btn-team") { selected.team = new Set(arr); }
-          else if (idBtn==="btn-opp") { selected.opp = new Set(arr); }
-          else if (idBtn==="btn-inj") { selected.inj = new Set(arr); }
-          else if (idBtn==="btn-stat") { selected.stat = new Set(arr); }
+          var arr=menu.find("input:checked").map(function(){return this.value;}).get();
+          if(idBtn==="btn-pos"){ selected.pos=new Set(arr); }
+          else if(idBtn==="btn-team"){ selected.team=new Set(arr); }
+          else if(idBtn==="btn-opp"){ selected.opp=new Set(arr); }
+          else if(idBtn==="btn-inj"){ selected.inj=new Set(arr); }
+          else if(idBtn==="btn-stat"){ selected.stat=new Set(arr); }
           applyFilters();
         });
       }
       function buildStartDropdown(colIndex){
-        var nodes = table.column(colIndex).nodes();
-        var seen = {}; var buckets = [];
-        nodes.each(function(td){ var sec=$(td).data("order"); var b=bucketFromEpoch(sec); if(!b||seen[b]) return; seen[b]=true; buckets.push(b); });
+        var nodes=table.column(colIndex).nodes(); var seen={}; var buckets=[];
+        nodes.each(function(td){ var sec=$(td).data("order"); var b=bucketFromEpoch(sec); if(!b||seen[b]) return; seen[b]=1; buckets.push(b); });
         buckets.sort(function(a,b){ return bucketOrderIndex(a)-bucketOrderIndex(b); });
-        var wrap = $('<div class="dropdown filter-dd"></div>');
-        var btn  = $('<button id="btn-start" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Filter</button>');
-        var menu = $('<div id="menu-start" class="dropdown-menu p-2"></div>');
+        var wrap=$('<div class="dropdown filter-dd"></div>');
+        var btn =$('<button id="btn-start" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Filter</button>');
+        var menu=$('<div id="menu-start" class="dropdown-menu p-2"></div>');
         buckets.forEach(function(v){ var safe=v.replace(/\s+/g,"_"); var row=$('<div class="form-check"></div>'); var cb=$('<input class="form-check-input" type="checkbox" id="menu-start_'+safe+'" value="'+v+'">'); var lb=$('<label class="form-check-label" for="menu-start_'+safe+'">'+v+'</label>'); row.append(cb).append(lb); menu.append(row); });
-        wrap.append(btn).append(menu);
-        $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
+        wrap.append(btn).append(menu); $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
         menu.on("change","input[type=checkbox]", function(){
-          var arr = menu.find("input:checked").map(function(){return this.value;}).get();
-          selected.start = new Set(arr);
-          table.draw();
-          persist();
+          var arr=menu.find("input:checked").map(function(){return this.value;}).get(); selected.start=new Set(arr); table.draw(); persist();
         });
       }
       $("[data-key='name']").on("keyup change", function(){ applyFilters(); });
-      buildCheckboxDropdown(2, "btn-pos",  "Position", "menu-pos",  collectTextsForColumn(2));
-      buildCheckboxDropdown(4, "btn-team", "Team",     "menu-team", collectTextsForColumn(4));
-      buildCheckboxDropdown(5, "btn-opp",  "Opponent", "menu-opp",  collectTextsForColumn(5, function(x){ return x.replace(/^@/,""); }), function(a,b){ a=a.toLowerCase(); b=b.toLowerCase(); if(a<b) return -1; if(a>b) return 1; return 0; });
+      buildCheckboxDropdown(2,"btn-pos","menu-pos",collectTextsForColumn(2));
+      buildCheckboxDropdown(4,"btn-team","menu-team",collectTextsForColumn(4));
+      buildCheckboxDropdown(5,"btn-opp","menu-opp",collectTextsForColumn(5,function(x){return x.replace(/^@/,"");}), function(a,b){ a=a.toLowerCase(); b=b.toLowerCase(); return a<b?-1:a>b?1:0; });
       buildStartDropdown(6);
-      buildCheckboxDropdown(7, "btn-inj",  "Injury",   "menu-inj",  collectTextsForColumn(7));
-      buildCheckboxDropdown(8, "btn-stat", "Status",   "menu-stat", collectTextsForColumn(8));
-      /* Restore state (labels always say "Filter") */
+      buildCheckboxDropdown(7,"btn-inj","menu-inj",collectTextsForColumn(7));
+      buildCheckboxDropdown(8,"btn-stat","menu-stat",collectTextsForColumn(8));
       function restoreState(s){
-        if (s.name){ $("[data-key='name']").val(s.name); }
-        ["pos","team","opp","inj","stat"].forEach(function(k){
-          if(Array.isArray(s[k]) && s[k].length){
-            s[k].forEach(function(v){ $("#menu-"+k+" input[value=\""+v+"\"]").prop("checked", true); });
-            selected[k]=new Set(s[k]);
-          }
-        });
-        if (Array.isArray(s.start) && s.start.length){
-          s.start.forEach(function(v){ $("#menu-start input[value=\""+v+"\"]").prop("checked", true); });
-          selected.start=new Set(s.start);
-        }
+        if(s.name){ $("[data-key='name']").val(s.name); }
+        ["pos","team","opp","inj","stat"].forEach(function(k){ if(Array.isArray(s[k])&&s[k].length){ s[k].forEach(function(v){ $("#menu-"+k+" input[value=\""+v+"\"]").prop("checked",true); }); selected[k]=new Set(s[k]); } });
+        if(Array.isArray(s.start)&&s.start.length){ s.start.forEach(function(v){ $("#menu-start input[value=\""+v+"\"]").prop("checked",true); }); selected.start=new Set(s.start); }
         applyFilters();
       }
-      var s = Object.assign({}, readStateFromStorage(), readStateFromURL());
-      restoreState(s);
+      var s=Object.assign({}, readStateFromStorage(), readStateFromURL()); restoreState(s);
+      function writeStateToStorage(s){ try{ localStorage.setItem(stateKey, JSON.stringify(s||{})); }catch(e){} }
     });
   </script>
 </body>
