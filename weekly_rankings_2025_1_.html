@@ -11,10 +11,8 @@
   <style>
     body, table { font-family: 'Archivo', sans-serif; }
     .table-responsive { overflow-x: visible; }
-    /* Keep the button bar compact; many site themes make it full-width */
     .dt-buttons { display: inline-flex; gap: 6px; flex-wrap: wrap; }
-    .dt-buttons .btn { width: auto !important; display: inline-block; padding: 0.3rem 0.5rem; font-size: 0.875rem; }
-    /* Table sizing: fixed layout + proportional column widths via <colgroup> */
+    .dt-buttons .btn { width: auto !important; display: inline-block; padding: 0.35rem 0.6rem; font-size: 0.875rem; }
     #example { table-layout: fixed; width: 100%; }
     #example th, #example td { text-align: center; padding: 0.35rem 0.35rem; font-size: 14px; }
     #example thead th { position: sticky; top: 0; background-color: #f8f9fa; z-index: 2; }
@@ -27,12 +25,12 @@
     .dataTables_filter { display: none; }
     .desktop-label { display: inline; }
     .mobile-label { display: none; }
-    /* Medium screens (site containers can be narrow even on desktop) */
+    .start-filter-dropdown .dropdown-menu { min-width: 190px; max-height: 260px; overflow: auto; }
+    .start-filter-dropdown .form-check { margin-bottom: 4px; }
     @media (max-width: 992px) {
       #example th, #example td { font-size: 12px; padding: 0.25rem 0.25rem; }
       #example thead .form-select, #example thead .form-control { font-size: 11px; }
     }
-    /* Phones */
     @media (max-width: 576px) {
       #example th, #example td { font-size: 11px; padding: 2px; }
       .desktop-label { display: none; }
@@ -41,10 +39,7 @@
   </style>
 </head>
 <body class="p-4">
-  <div class="d-flex align-items-center gap-2 mb-2">
-    <div id="last-updated"><strong>Last Updated:</strong> <span id="last-updated-time"></span></div>
-    <button id="reset-filters" type="button" class="btn btn-sm btn-outline-secondary">Reset Filters</button>
-  </div>
+  <div class="mb-2"><strong>Last Updated:</strong> Mon 09/01 08:00 PM</div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <colgroup>
@@ -3899,18 +3894,9 @@
   <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
-    function formatET(d){
-      var tz = "America/New_York";
-      var wd = new Intl.DateTimeFormat("en-US",{weekday:"short",timeZone:tz}).format(d);
-      var mo = new Intl.DateTimeFormat("en-US",{month:"2-digit",timeZone:tz}).format(d);
-      var da = new Intl.DateTimeFormat("en-US",{day:"2-digit",timeZone:tz}).format(d);
-      var hm = new Intl.DateTimeFormat("en-US",{hour:"2-digit",minute:"2-digit",hour12:true,timeZone:tz}).format(d).toUpperCase();
-      return wd + " " + mo + "/" + da + " " + hm;
-    }
-    document.getElementById("last-updated-time").textContent = formatET(new Date());
-
     $.fn.dataTable.ext.order["dom-data-order"] = function (settings, col) {
       return this.api().column(col, {order:"index"}).nodes().map(function(td){
         var v = $(td).data("order");
@@ -3948,7 +3934,17 @@
         autoWidth: false,
         order: [[0, "asc"], [1, "asc"]],
         orderCellsTop: true,
-        buttons: [{ extend: "csvHtml5", text: "Export to CSV", filename: "weekly_fantasy_rankings_2025_week_1" }],
+        buttons: [ { extend: "csvHtml5", text: "Export to CSV", filename: "weekly_fantasy_rankings_2025_week_1" },
+                   { text: "Reset Filters", className: "btn btn-secondary", action: function (e, dt) {
+                       $("[data-key='name']").val("");
+                       $("#filter-pos, #filter-team, #filter-opp, #filter-inj, #filter-stat").val("").trigger("change");
+                       selectedBuckets.clear();
+                       $("#filter-start-btn").attr("data-label","All").text("Start: All");
+                       $(".start-filter-dropdown input[type=checkbox]").prop("checked", false);
+                       dt.search("").columns().search(""); dt.draw();
+                       localStorage.removeItem(stateKey);
+                       window.history.replaceState(null, "", window.location.pathname);
+                     } } ],
         columnDefs: [
           { targets: 0, orderDataType: "dom-data-order" },
           { targets: 6, orderDataType: "dom-data-order" },
@@ -3997,7 +3993,7 @@
           opp: ($("#filter-opp").val()||""),
           inj: ($("#filter-inj").val()||""),
           stat: ($("#filter-stat").val()||""),
-          start: ($("#filter-start").val()||[])
+          start: Array.from(selectedBuckets)
         };
       }
       function persistState(){ var s = currentState(); writeStateToStorage(s); writeStateToURL(s); }
@@ -4032,7 +4028,6 @@
       }
 
       var selectedBuckets = new Set();
-      function rebuildBucketFilter(){ table.draw(); }
       $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
         if (settings.nTable !== document.getElementById("example")) return true;
         if (!selectedBuckets.size) return true;
@@ -4042,7 +4037,7 @@
         var b = bucketFromEpoch(sec);
         return selectedBuckets.has(b);
       });
-      function addStartMulti(colIndex, placeholder, id){
+      function buildStartCheckboxDropdown(colIndex){
         var nodes = table.column(colIndex).nodes();
         var seen = {}; var items = [];
         nodes.each(function(td){
@@ -4052,14 +4047,26 @@
           seen[b]=true; items.push(b);
         });
         items.sort();
-        var sel = $("<select/>",{class:"form-select form-select-sm text-center", id:id, multiple:true});
-        items.forEach(function(it){ sel.append($("<option>").val(it).text(it)); });
-        sel.on("change", function(){
-          selectedBuckets = new Set(Array.from(this.selectedOptions).map(function(o){return o.value;}));
-          rebuildBucketFilter();
+        var wrap = $('<div class="dropdown start-filter-dropdown"></div>');
+        var btn  = $('<button id="filter-start-btn" class="btn btn-sm btn-outline-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" data-label="All">Start: All</button>');
+        var menu = $('<div id="filter-start-menu" class="dropdown-menu p-2"></div>');
+        items.forEach(function(it){
+          var id = "startchk_" + it.replace(/\s+/g,"_");
+          var item = $('<div class="form-check"></div>');
+          var cb = $('<input class="form-check-input" type="checkbox" id="'+id+'" value="'+it+'">');
+          var lb = $('<label class="form-check-label" for="'+id+'">'+it+'</label>');
+          item.append(cb).append(lb);
+          menu.append(item);
+        });
+        wrap.append(btn).append(menu);
+        $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
+        menu.on("change","input[type=checkbox]", function(){
+          selectedBuckets = new Set(menu.find("input:checked").map(function(){return this.value;}).get());
+          var lbl = selectedBuckets.size ? Array.from(selectedBuckets).join(", ") : "All";
+          btn.attr("data-label", lbl).text("Start: " + lbl);
+          table.draw();
           persistState();
         });
-        $("#example thead tr.filter-row th").eq(colIndex).empty().append(sel);
       }
 
       $("[data-key='name']").on("keyup change", function(){
@@ -4069,7 +4076,7 @@
       addDropdown(2, "Filter", "filter-pos");
       addDropdown(4, "Filter", "filter-team");
       addDropdown(5, "Filter", "filter-opp", function(x){ return x.replace(/^@/,"").toLowerCase(); });
-      addStartMulti(6, "Filter", "filter-start");
+      buildStartCheckboxDropdown(6);
       addDropdown(7, "Filter", "filter-inj");
       addDropdown(8, "Filter", "filter-stat");
 
@@ -4079,9 +4086,10 @@
         if (s.team){ $("#filter-team").val(s.team).trigger("change"); }
         if (s.opp){ $("#filter-opp").val(s.opp).trigger("change"); }
         if (Array.isArray(s.start) && s.start.length){
-          $("#filter-start").val(s.start);
           selectedBuckets = new Set(s.start);
-          rebuildBucketFilter();
+          s.start.forEach(function(v){ $("#filter-start-menu input[value=\""+v+"\"]").prop("checked", true); });
+          $("#filter-start-btn").attr("data-label", s.start.join(", ")).text("Start: " + s.start.join(", "));
+          table.draw();
         }
         if (s.inj){ $("#filter-inj").val(s.inj).trigger("change"); }
         if (s.stat){ $("#filter-stat").val(s.stat).trigger("change"); }
@@ -4090,15 +4098,6 @@
       var sLS = readStateFromStorage();
       var s = Object.assign({}, sLS, sURL);
       restoreState(s);
-
-      $("#reset-filters").on("click", function(){
-        $("[data-key='name']").val("");
-        $("#filter-pos, #filter-team, #filter-opp, #filter-inj, #filter-stat").val("").trigger("change");
-        $("#filter-start").val([]); selectedBuckets.clear(); rebuildBucketFilter();
-        table.search("").columns().search("").draw();
-        localStorage.removeItem(stateKey);
-        window.history.replaceState(null, "", window.location.pathname);
-      });
     });
   </script>
 </body>
