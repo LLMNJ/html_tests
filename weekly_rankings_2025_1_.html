@@ -46,7 +46,7 @@
   </style>
 </head>
 <body class="p-4">
-  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Mon 09/01 08:42 PM</div>
+  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Mon 09/01 08:50 PM</div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <colgroup>
@@ -3942,60 +3942,27 @@
         order: [[0, "asc"], [1, "asc"]],
         orderCellsTop: true,
         buttons: [
-          {
-            extend: "copyHtml5",
+          { extend: "copyHtml5",
             title: "Weekly Fantasy Rankings 2025 Week 1",
-            exportOptions: {
-              columns: ":visible",
-              modifier: { search: "applied", order: "applied" },
-              format: { body: function (data) { return dtExportText(data); } }
-            }
-          },
-          {
-            extend: "csvHtml5",
+            exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
+          { extend: "csvHtml5",
             title: "Weekly Fantasy Rankings 2025 Week 1",
             filename: "weekly_fantasy_rankings_2025_week_1",
-            exportOptions: {
-              columns: ":visible",
-              modifier: { search: "applied", order: "applied" },
-              format: { body: function (data) { return dtExportText(data); } }
-            }
-          },
-          {
-            extend: "excelHtml5",
+            exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
+          { extend: "excelHtml5",
             title: "Weekly Fantasy Rankings 2025 Week 1",
             filename: "weekly_fantasy_rankings_2025_week_1",
-            exportOptions: {
-              columns: ":visible",
-              modifier: { search: "applied", order: "applied" },
-              format: { body: function (data) { return dtExportText(data); } }
-            }
-          },
-          {
-            extend: "print",
+            exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
+          { extend: "print",
             title: "Weekly Fantasy Rankings 2025 Week 1",
-            messageTop: function(){
-              var el = document.getElementById("last-updated-block");
-              return el ? el.textContent : "";
-            },
-            exportOptions: {
-              columns: ":visible",
-              modifier: { search: "applied", order: "applied" },
-              format: { body: function (data) { return dtExportText(data); } }
-            }
-          },
-          {
-            text: "Reset Filters",
-            action: function (e, dt) {
+            messageTop: function(){ var el = document.getElementById("last-updated-block"); return el ? el.textContent : ""; },
+            exportOptions: { columns: ":visible", modifier: { search: "applied", order: "applied" }, format: { body: function (d) { return dtExportText(d); } } } },
+          { text: "Reset Filters", action: function () {
               $("[data-key='name']").val("");
               selected.pos.clear(); selected.team.clear(); selected.opp.clear(); selected.inj.clear(); selected.stat.clear(); selected.start.clear();
               $(".filter-dd input[type=checkbox]").prop("checked", false);
-              setBtnText("btn-pos","Position",[]);
-              setBtnText("btn-team","Team",[]);
-              setBtnText("btn-opp","Opponent",[]);
-              setBtnText("btn-start","Start",[]);
-              setBtnText("btn-inj","Injury",[]);
-              setBtnText("btn-stat","Status",[]);
+              setBtnText("btn-pos","Position",[]); setBtnText("btn-team","Team",[]); setBtnText("btn-opp","Opponent",[]);
+              setBtnText("btn-start","Start",[]); setBtnText("btn-inj","Injury",[]); setBtnText("btn-stat","Status",[]);
               table.search("").columns().search("");
               table.draw();
               localStorage.removeItem(stateKey);
@@ -4023,31 +3990,43 @@
         start: Array.from(selected.start), inj: Array.from(selected.inj), stat: Array.from(selected.stat)
       }; }
       function persist(){ var s=currentState(); writeStateToStorage(s); writeStateToURL(s); }
-      function regexFromSet(set, prefixOptAt){ if(!set.size) return ""; var arr=Array.from(set).map(escapeRegex); var joined=arr.map(function(v){ return (prefixOptAt?"@?":"")+v; }).join("|"); return "^(?:"+joined+")$"; }
+      function regexFromSet(set){ if(!set.size) return ""; var arr=Array.from(set).map(escapeRegex); return arr.join("|"); }
       function applyFilters(){
         table.column(3).search(($("[data-key='name']").val()||""));
-        table.column(2).search(regexFromSet(selected.pos,false), true, false);
-        table.column(4).search(regexFromSet(selected.team,false), true, false);
-        table.column(5).search(regexFromSet(selected.opp,true), true, false);
-        table.column(7).search(regexFromSet(selected.inj,false), true, false);
-        table.column(8).search(regexFromSet(selected.stat,false), true, false);
+        table.column(2).search(regexFromSet(selected.pos), true, false);
+        table.column(4).search(regexFromSet(selected.team), true, false);
+        /* Opponent handled via custom filter below */
+        table.column(7).search(regexFromSet(selected.inj), true, false);
+        table.column(8).search(regexFromSet(selected.stat), true, false);
         table.draw();
         persist();
       }
       $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
         if (settings.nTable !== document.getElementById("example")) return true;
-        if (!selected.start.size) return true;
-        var td = table.column(6).nodes()[dataIndex];
-        var sec = $(td).data("order");
-        if (sec===undefined || sec===null || sec==="") return true;
-        var b = bucketFromEpoch(sec);
-        return selected.start.has(b);
+        /* Start bucket filter */
+        if (selected.start.size){
+          var tdS = table.column(6).nodes()[dataIndex];
+          var sec = $(tdS).data("order");
+          if (sec !== undefined && sec !== null && sec !== ""){
+            var b = bucketFromEpoch(sec);
+            if (!selected.start.has(b)) return false;
+          }
+        }
+        /* Opponent filter (matches visible text, ignores leading @, case-insensitive) */
+        if (selected.opp.size){
+          var tdO = table.column(5).nodes()[dataIndex];
+          var txt = $(tdO).text().trim().replace(/^@/,"").toLowerCase();
+          var ok = false; var arr = Array.from(selected.opp);
+          for (var i=0; i<arr.length; i++){ if (arr[i].toLowerCase() === txt){ ok = true; break; } }
+          if (!ok) return false;
+        }
+        return true;
       });
       function collectTextsForColumn(idx, normalize){
         var texts = table.column(idx).data().map(function(d){ return $("<div>").html(d).text(); }).toArray();
         var seen = {}; var out = [];
         texts.forEach(function(t){
-          if(!t) return; var v = normalize?normalize(t):t; if(!v.trim()) return; if(seen[v]) return; seen[v]=true; out.push(v);
+          if(!t) return; var v = normalize?normalize(t):t; v=v.trim(); if(!v) return; if(seen[v]) return; seen[v]=true; out.push(v);
         });
         return out;
       }
