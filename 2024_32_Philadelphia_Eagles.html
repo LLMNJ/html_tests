@@ -6,29 +6,34 @@
   <title>Philadelphia Eagles — Snap Counts & Fantasy Production</title>
   <style>
     :root{--w:470px;}
-    /* Blend into white articles: no dark page background */
+    /* Blend into white articles */
     html,body{margin:0;padding:0;background:transparent;}
-    /* Tight container around the table (no wide side gutters) */
-    .carousel{max-width:var(--w);margin:8px auto;}
-    /* Swipe area: no dark backdrop, no extra padding */
-    .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;background:transparent;}
-    .slide{flex:0 0 100%;scroll-snap-align:start;padding:0;background:transparent;}
-    /* Center gt table; let the table’s own styling stand out */
+    /* Card frame around the entire widget (slides + dots) */
+    .carousel{max-width:calc(var(--w) + 24px); /* table width + padding */
+              margin:12px auto; padding:12px;
+              border:1px solid #d0d7e3; border-radius:12px;
+              background:transparent; box-shadow:0 1px 2px rgba(16,24,40,.06);} 
+    /* Swipe area */
+    .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+            -webkit-overflow-scrolling:touch;background:transparent;}
+    .slide{flex:0 0 100%;scroll-snap-align:start;padding:0;position:relative;background:transparent;}
     .gt_table{margin:auto;}
-    /* Compact, neutral pager that looks good on white */
-    .pager{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:6px;}
-    .pager button{background:transparent;border:0;cursor:pointer;font-size:20px;color:#7a869a;}
-    .dot{width:8px;height:8px;border-radius:50%;background:#c7ced9;opacity:.9;border:0;}
-    .dot.active{background:#7a869a;}
-    /* Subtle swipe hint, no extra box behind it */
-    .swipe-hint{position:absolute;right:0;bottom:2px;opacity:.6;font-size:12px;color:#7a869a;user-select:none;}
+    /* “swipe ›” hint */
+    .swipe-hint{position:absolute;right:8px;bottom:6px;opacity:.6;font-size:12px;color:#7a869a;user-select:none;}
+    /* Pager */
+    .pager{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:8px;}
+    .pager button{background:transparent;border:0;cursor:pointer;font-size:20px;color:#6b7a90;}
+    /* Clearer dots: hollow for inactive, filled for active */
+    .dot{width:10px;height:10px;border-radius:50%;
+         background:transparent;border:2px solid #9aa4b2;opacity:1;}
+    .dot.active{background:#6b7a90;border-color:#6b7a90;}
   </style>
 </head>
 <body>
   <div class="carousel" id="carousel_Philadelphia_Eagles">
     <div class="slides">
       <section class="slide">
-<div id="alwdedymxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="iikwookiwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -150,7 +155,7 @@
         <div class="swipe-hint">swipe &#8250;</div>
       </section>
       <section class="slide">
-<div id="heqacohjri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ncnkgjfaeu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -217,7 +222,7 @@
         <div class="swipe-hint">swipe &#8250;</div>
       </section>
       <section class="slide">
-<div id="rcsigeqjft" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dhmmjeqkxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -309,7 +314,7 @@
         <div class="swipe-hint">swipe &#8250;</div>
       </section>
       <section class="slide">
-<div id="uidhkjeepj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ezpgcdblti" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -385,7 +390,7 @@
         <div class="swipe-hint">swipe &#8250;</div>
       </section>
       <section class="slide">
-<div id="zjqkgsihxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gxxztpzicg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
