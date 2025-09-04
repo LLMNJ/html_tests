@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Philadelphia Eagles — Snap Counts & Fantasy Production</title>
   <style>
-    :root{--w:470px; --stub:36%; --colw:auto;}
+    :root{--w:470px; --cols:2;}
     html,body{margin:0;padding:0;background:transparent;}
     .carousel{max-width:calc(var(--w) + 24px);margin:12px auto;padding:12px;
               border:1px solid #d0d7e3;border-radius:12px;background:transparent;
@@ -28,40 +28,35 @@
       .gt_table .gt_title{font-size:18px;line-height:1.15;}
       .gt_table .gt_subtitle{font-size:12px;line-height:1.2;}
 
-      /* Numbers stay single line for density */
-      .gt_table td{
+      /* Every column gets the same width: 100% / --cols */
+      .gt_table thead tr th, .gt_table tbody tr td{
+        width:calc(100% / var(--cols)) !important;
+        max-width:calc(100% / var(--cols)) !important;
+      }
+
+      /* Numbers stay single line & right-aligned; STAT cells wrap & left-align */
+      .gt_table tbody tr td{
         padding:2px 3px !important;font-size:11px;line-height:1.1;
         white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
-        font-variant-numeric:tabular-nums;
+        font-variant-numeric:tabular-nums;text-align:right;
+      }
+      .gt_table tbody tr td:first-child{
+        white-space:normal !important;overflow:visible !important;text-overflow:clip !important;
+        word-break:break-word;overflow-wrap:anywhere;hyphens:auto;text-align:left;
+        padding:2px 6px !important;
       }
 
-      /* Headers (player names) — wrap, LEFT-align, and never ellipsize */
+      /* Headers (player names & STAT) wrap and are centered within their column */
       .gt_table thead th, .gt_table .gt_col_heading, .gt_table .gt_column_spanner{
-        padding:2px 4px !important; font-size:11px; line-height:1.1;
-        white-space:normal !important; overflow:visible !important; min-width:0;
-        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
-        text-overflow:clip !important; text-align:left !important;
-      }
-      .gt_table thead th *, .gt_table .gt_col_heading *, .gt_table .gt_column_spanner *{
-        white-space:normal !important; overflow:visible !important;
-        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
-        text-overflow:clip !important; text-align:left !important; display:block;
-      }
-
-      /* Stat (first) column wraps and has fixed % width */
-      .gt_table td.gt_stub, .gt_table th.gt_stub, .gt_table .gt_stub{
-        padding:2px 6px !important;font-size:11px;line-height:1.15;
+        padding:2px 4px !important;font-size:11px;line-height:1.1;
         white-space:normal !important;overflow:visible !important;min-width:0;
         word-break:break-word;overflow-wrap:anywhere;hyphens:auto;
+        text-align:center !important;text-overflow:clip !important;
       }
-      .gt_table thead tr th:first-child,
-      .gt_table tbody tr td:first-child{
-        width:var(--stub) !important;max-width:var(--stub) !important;
-      }
-      /* All player columns share the remaining width equally */
-      .gt_table thead tr th:nth-child(n+2),
-      .gt_table tbody tr td:nth-child(n+2){
-        width:var(--colw) !important;max-width:var(--colw) !important;
+      .gt_table thead th *, .gt_table .gt_col_heading *, .gt_table .gt_column_spanner *{
+        white-space:normal !important;overflow:visible !important;
+        word-break:break-word;overflow-wrap:anywhere;hyphens:auto;
+        text-align:center !important;display:block;
       }
 
       .gt_table .gt_footnotes, .gt_table .gt_sourcenotes{font-size:10px;}
@@ -73,7 +68,6 @@
       .gt_table .gt_title{font-size:16px;}
       .gt_table .gt_subtitle{font-size:11px;}
       .labelbar .tab{padding:5px 8px;font-size:11px;}
-      :root{--stub:42%;}
     }
   </style>
 </head>
@@ -81,7 +75,7 @@
   <div class="carousel" id="carousel_Philadelphia_Eagles">
     <div class="slides">
       <section class="slide">
-<div id="pdzbogfvyw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lemmptcdsl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -202,7 +196,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="jnsepzvhaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dwxkynzhho" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -268,7 +262,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="qjysovpmby" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="iucjxzkkqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -359,7 +353,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="ddgpeqaunf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ghevshhzou" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -434,7 +428,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="hancqelhqn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="foeysdhlaq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
