@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Philadelphia Eagles — Snap Counts & Fantasy Production</title>
   <style>
-    :root{--w:470px; --stub:36%;}
+    :root{--w:470px; --stub:36%; --colw:auto;}
     html,body{margin:0;padding:0;background:transparent;}
     .carousel{max-width:calc(var(--w) + 24px);margin:12px auto;padding:12px;
               border:1px solid #d0d7e3;border-radius:12px;background:transparent;
@@ -28,30 +28,38 @@
       .gt_table .gt_title{font-size:18px;line-height:1.15;}
       .gt_table .gt_subtitle{font-size:12px;line-height:1.2;}
 
+      /* Numbers stay single line for density */
       .gt_table td{
-        padding:2px 3px !important;
-        font-size:11px; line-height:1.1;
-        white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0;
+        padding:2px 3px !important;font-size:11px;line-height:1.1;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
         font-variant-numeric:tabular-nums;
       }
 
+      /* Headers (player names) can wrap */
       .gt_table thead th, .gt_table .gt_col_heading, .gt_table .gt_column_spanner{
-        padding:2px 4px !important; font-size:11px; line-height:1.1;
-        white-space:normal !important; overflow:visible !important; min-width:0;
-        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
+        padding:2px 4px !important;font-size:11px;line-height:1.1;
+        white-space:normal !important;overflow:visible !important;min-width:0;
+        word-break:break-word;overflow-wrap:anywhere;hyphens:auto;
       }
       .gt_table thead th *, .gt_table .gt_col_heading *, .gt_table .gt_column_spanner *{
-        white-space:normal !important; overflow:visible !important;
-        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
+        white-space:normal !important;overflow:visible !important;
+        word-break:break-word;overflow-wrap:anywhere;hyphens:auto;
       }
 
+      /* Stat (first) column wraps and has fixed % width */
       .gt_table td.gt_stub, .gt_table th.gt_stub, .gt_table .gt_stub{
-        padding:2px 6px !important; font-size:11px; line-height:1.15;
-        white-space:normal !important; overflow:visible !important; min-width:0;
-        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
+        padding:2px 6px !important;font-size:11px;line-height:1.15;
+        white-space:normal !important;overflow:visible !important;min-width:0;
+        word-break:break-word;overflow-wrap:anywhere;hyphens:auto;
       }
-      .gt_table thead th:first-child, .gt_table tbody td.gt_stub{
-        width:var(--stub) !important; max-width:var(--stub) !important;
+      .gt_table thead tr th:first-child,
+      .gt_table tbody tr td:first-child{
+        width:var(--stub) !important;max-width:var(--stub) !important;
+      }
+      /* All player columns share the remaining width equally */
+      .gt_table thead tr th:nth-child(n+2),
+      .gt_table tbody tr td:nth-child(n+2){
+        width:var(--colw) !important;max-width:var(--colw) !important;
       }
 
       .gt_table .gt_footnotes, .gt_table .gt_sourcenotes{font-size:10px;}
@@ -71,7 +79,7 @@
   <div class="carousel" id="carousel_Philadelphia_Eagles">
     <div class="slides">
       <section class="slide">
-<div id="wkdlpjcghb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gvgfysffdv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -192,7 +200,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="rdigurdxnl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ydoezcqyit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -258,7 +266,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="snkcbjprvb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vzuwhsyoso" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -349,7 +357,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="jqqpcaiblj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ruesvkzqjb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -424,7 +432,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="nahzjeimqg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bojzowrmwc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -492,13 +500,11 @@
 (function(){
   const root=document.getElementById("carousel_Philadelphia_Eagles");
   const track  = root.querySelector(".slides");
-  // Only count slides that are direct children of the track
   const slides = [...track.querySelectorAll(":scope > .slide")];
   const tabs   = [...root.querySelectorAll(".labelbar .tab")];
   let index = 0;
   const clamp = i => Math.max(0, Math.min(i, slides.length-1));
   function reflect(){ tabs.forEach((t,j)=>t.classList.toggle("active", j===index)); }
-  // Compute the exact scrollLeft needed to align the slide's left edge with the track's left edge
   function leftOf(i){
     const r = slides[i].getBoundingClientRect();
     const t = track.getBoundingClientRect();
@@ -506,30 +512,39 @@
   }
   function go(i){ index = clamp(i); track.scrollTo({left:leftOf(index), behavior:"smooth"}); reflect(); }
   tabs.forEach((t,i)=>t.addEventListener("click",(e)=>{ e.preventDefault(); e.stopPropagation(); go(i); }));
-  function nearest(){
-    const x = track.scrollLeft;
-    let best = 0, dist = Infinity;
-    for (let i=0;i<slides.length;i++){
-      const d = Math.abs(x - leftOf(i));
-      if (d < dist){ dist = d; best = i; }
-    }
-    return best;
+
+  // -------- Equalize player column widths so ALL columns fit --------
+  function sizeColumns(tbl){
+    const stubPct = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--stub")) || 36;
+    const leafTHs = tbl.querySelectorAll("thead tr:last-child th");
+    let total = leafTHs.length; if (!total) return;
+    const players = Math.max(1, total - 1);
+    const colw = (100 - stubPct) / players;         // percentage for each player column
+    tbl.style.setProperty("--colw", colw + "%");    // used by CSS nth-child rule
   }
-  // Keep active tab in sync while the user swipes
+  function sizeAll(){ root.querySelectorAll(".gt_table").forEach(sizeColumns); }
+  sizeAll();
+
+  // Keep active tab in sync while swiping
   let ticking = false;
   track.addEventListener("scroll",()=>{
     if (!ticking){
       requestAnimationFrame(()=>{
-        const i = nearest();
-        if (i !== index){ index = i; reflect(); }
+        const x = track.scrollLeft;
+        let best = 0, dist = Infinity;
+        for (let i=0;i<slides.length;i++){
+          const d = Math.abs(x - leftOf(i));
+          if (d < dist){ dist = d; best = i; }
+        }
+        if (best !== index){ index = best; reflect(); }
         ticking = false;
       });
       ticking = true;
     }
   });
-  // Re-center on resize (e.g., orientation change)
+  // Recompute on resize/orientation change
   if ("ResizeObserver" in window){
-    new ResizeObserver(()=>{ track.scrollTo({left:leftOf(index)}); }).observe(track);
+    new ResizeObserver(()=>{ sizeAll(); track.scrollTo({left:leftOf(index)}); }).observe(root);
   }
 })();
     </script>
