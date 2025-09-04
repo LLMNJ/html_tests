@@ -26,22 +26,11 @@
     .labelbar .tab.active{background:#1f2a44;color:#fff;border-color:#1f2a44;}
     .labelbar .tab:focus-visible{outline:2px solid #1f2a44;outline-offset:2px;}
 
-    /* ===== Mobile compression (fit columns) with wrapping for headers & Stat labels ===== */
+    /* ===== Mobile compression (fit columns) with real wrapping where needed) ===== */
     @media (max-width:680px){
-      .gt_table{table-layout:fixed;width:var(--w) !important;margin:auto;}
+      .gt_table{table-layout:fixed;width:var(--w) !important;margin:auto;border-collapse:collapse;}
       .gt_table .gt_title{font-size:18px;line-height:1.15;}
       .gt_table .gt_subtitle{font-size:12px;line-height:1.2;}
-
-      /* HEADERS (player names) — allow wrapping */
-      .gt_table thead th,
-      .gt_table .gt_col_heading,
-      .gt_table .gt_column_spanner{
-        padding:2px 4px !important;
-        font-size:11px; line-height:1.1;
-        white-space:normal; word-break:break-word; hyphens:auto;
-        min-width:0; overflow:visible;
-        letter-spacing:-0.1px;
-      }
 
       /* BODY CELLS — single line for tight fit */
       .gt_table td{
@@ -51,15 +40,37 @@
         font-variant-numeric:tabular-nums;
       }
 
-      /* === STRONG OVERRIDE: STUB (Stat column) MUST WRAP === */
+      /* HEADERS (player names) — force wrapping on the element AND its children */
+      .gt_table thead th,
+      .gt_table .gt_col_heading,
+      .gt_table .gt_column_spanner{
+        padding:2px 4px !important;
+        font-size:11px; line-height:1.1;
+        white-space:normal !important; overflow:visible !important; min-width:0;
+        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
+        letter-spacing:-0.1px;
+      }
+      .gt_table thead th *,
+      .gt_table .gt_col_heading *,
+      .gt_table .gt_column_spanner *{
+        white-space:normal !important; overflow:visible !important;
+        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
+      }
+
+      /* STUB (Stat labels) — must wrap AND not hog width */
       .gt_table td.gt_stub,
       .gt_table th.gt_stub,
       .gt_table .gt_stub{
         padding:2px 6px !important;
         font-size:11px; line-height:1.15;
-        white-space:normal !important;
-        word-break:break-word; hyphens:auto;
-        overflow:visible !important; text-overflow:clip !important; min-width:0;
+        white-space:normal !important; overflow:visible !important; min-width:0;
+        word-break:break-word; overflow-wrap:anywhere; hyphens:auto;
+        width:auto;
+      }
+      /* Cap stub column width so player columns keep room */
+      .gt_table thead th:first-child,
+      .gt_table tbody td.gt_stub{
+        width:38% !important; max-width:38% !important;
       }
 
       /* Footnotes/sources smaller */
@@ -71,6 +82,10 @@
       .gt_table .gt_stub, .gt_table td{padding:1px 2px !important;font-size:10px !important;}
       .gt_table .gt_title{font-size:16px;}
       .gt_table .gt_subtitle{font-size:11px;}
+      /* Stub a touch wider on very small phones */
+      .gt_table thead th:first-child, .gt_table tbody td.gt_stub{
+        width:42% !important; max-width:42% !important;
+      }
       .labelbar .tab{padding:5px 8px;font-size:11px;}
     }
   </style>
@@ -79,7 +94,7 @@
   <div class="carousel" id="carousel_Kansas_City_Chiefs">
     <div class="slides">
       <section class="slide">
-<div id="hxxmqtzysg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mdcrbwdyyi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -182,7 +197,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="awsfflpyla" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mtlgptivrd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -233,7 +248,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="gmdwpsgmnv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jzzjcjldgu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -310,7 +325,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="gzvetbxokd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oojkvqhqca" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -385,7 +400,7 @@
 </div>
       </section>
       <section class="slide">
-<div id="gofqqguyzv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="aoqfocluvy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: Roboto, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 12px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: 470px; border-top-style: solid; border-top-width: 3px; border-top-color: rgba(255, 255, 255, 0); border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #C3BDAF; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" width="470" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
