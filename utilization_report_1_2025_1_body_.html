@@ -36,14 +36,18 @@
     #snap-rates .row-cap-banner { display:none; text-align:center; font-size:0.9rem; margin:8px 0 16px; }
     #snap-rates .row-cap-banner .btn { margin-left:8px; }
     /* ===== Player notes (above tables) ===== */
-    #snap-rates #player-notes { font-size: 0.95rem; }
-    #snap-rates #player-notes .note-block { margin-bottom: 0.5rem; }
-    /* Only the <strong> (bold column) is bold; give a little space to p1…p5 */
-    #snap-rates #player-notes .note-title { margin-bottom: 0.35rem; }
+    #snap-rates #player-notes {
+      font-size: 0.95rem;
+      font-family: "Archivo", sans-serif;
+      line-height: 1.45;
+    }
+    #snap-rates #player-notes .note-block { margin-bottom: 0.6rem; }
+    /* Only the <strong> (bold column) is bold; open space before p1…p5 */
+    #snap-rates #player-notes .note-title { margin-bottom: 0.6rem; }
     #snap-rates #player-notes .note-title strong { font-weight: 600; }
-    #snap-rates #player-notes .note-para { margin: 0.25rem 0; }
-    #snap-rates #player-notes ul { margin: 0 0 0.25rem 1.25rem; }
-    #snap-rates #player-notes li { margin-bottom: 0.25rem; }
+    #snap-rates #player-notes .note-para { margin: 0.6rem 0; }
+    #snap-rates #player-notes ul { margin: 0.2rem 0 0.4rem 1.25rem; }
+    #snap-rates #player-notes li { margin-bottom: 0.3rem; }
 
     /* ===== CSS-only display modes (fast) ===== */
     #snap-rates.mode-totals th.pct-col,
