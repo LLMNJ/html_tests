@@ -2018,10 +2018,16 @@
           if(!recs || !recs.length){ clearPlayerRanks(); return; }
 
           var r = recs[0] || {};
-          var can = (r.can !== false);
+          // Strictly coerce can_include_rankings to boolean true only for true/1/"1"/"TRUE"/"true"
+          var can = false;
+          if (r && ("can" in r)) {
+            var v = r.can;
+            can = (v === true || v === 1 || v === "1" || v === "TRUE" || v === "true");
+          }
 
           var html = "";
-          html += _rankRow("Weekly (PPR) Rankings",    r.w,   (("lw"   in r) ? r.lw   : null), { coming: can ? null : "Coming Tuesday Afternoon", hideDelta: !can });
+          // When can === false, show text and hide delta for the Weekly line
+          html += _rankRow("Weekly (PPR) Rankings",    r.w,   (("lw"   in r) ? r.lw   : null), { coming: can ? null : "Coming Tuesday", hideDelta: !can });
           html += _rankRow("Rest of Season Rankings",   r.ros, (("lros" in r) ? r.lros : null));
           html += _rankRow("Dynasty Rankings",          r.dyn, (("ldyn" in r) ? r.ldyn : null));
 
