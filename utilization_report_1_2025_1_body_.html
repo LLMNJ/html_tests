@@ -1994,9 +1994,39 @@
         }
 
         function _rankRow(label, cur, prev, opts){
-          var val = _rankCell(cur, opts);
-          var delta = (opts && opts.hideDelta) ? "" : _formatDelta(cur, prev);
-          return "<div class=\"rank-row\"><div class=\"rank-label\">" + _escHtml(label) + "</div><div class=\"rank-value\">" + val + delta + "</div></div>";
+          opts = opts || {};
+
+          // If a "coming" message is provided (e.g., weekly ranks not yet available),
+          // show that message and ignore numbers/arrows entirely.
+          if (opts.coming) {
+            return [
+              "<div class=\"rank-row d-flex justify-content-between\">",
+                "<div class=\"rank-label\">" + _escHtml(label) + "</div>",
+                "<div class=\"rank-val\">" + _escHtml(opts.coming) + "</div>",
+              "</div>"
+            ].join("");
+          }
+
+          var showDelta = !opts.hideDelta;
+          var curNum = (cur != null ? Number(cur) : NaN);
+          var prevNum = (prev != null ? Number(prev) : NaN);
+          var curTxt = (isNaN(curNum) ? "—" : String(curNum));
+
+          var deltaTxt = "";
+          if (showDelta && !isNaN(prevNum) && !isNaN(curNum)) {
+            var d = curNum - prevNum;
+            if (d !== 0) {
+              var arrow = (d < 0) ? "▲" : "▼";
+              deltaTxt = " <span class=\"rank-delta\">" + arrow + " " + Math.abs(d) + "</span>";
+            }
+          }
+
+          return [
+            "<div class=\"rank-row d-flex justify-content-between\">",
+              "<div class=\"rank-label\">" + _escHtml(label) + "</div>",
+              "<div class=\"rank-val\">" + curTxt + deltaTxt + "</div>",
+            "</div>"
+          ].join("");
         }
 
         function clearPlayerRanks(){
@@ -2007,27 +2037,29 @@
         }
 
         function renderPlayerRanks(playerId){
-          // Only support league 1 (others won't have rankings data)
-          if(window.leagueId !== 1){ clearPlayerRanks(); return; }
+          // Only support league 1 (others won\'t have rankings data)
+          if (window.leagueId !== 1) { clearPlayerRanks(); return; }
           var box = _el("player-ranks");
           var rows = _el("player-ranks-rows");
-          if(!box || !rows){ return; }
+          if (!box || !rows) { return; }
 
           var map = window.playerRanks || {};
           var recs = map[String(playerId)];
-          if(!recs || !recs.length){ clearPlayerRanks(); return; }
+          if (!recs || !recs.length) { clearPlayerRanks(); return; }
 
           var r = recs[0] || {};
-          // Strictly coerce can_include_rankings to boolean true only for true/1/"1"/"TRUE"/"true"
-          var can = false;
-          if (r && ("can" in r)) {
-            var v = r.can;
-            can = (v === true || v === 1 || v === "1" || v === "TRUE" || v === "true");
-          }
+          // Accept either r.can (JS alias) or r.can_include_rankings from JSON
+          var rawCan = (("can" in r) ? r.can : (("can_include_rankings" in r) ? r.can_include_rankings : null));
+          var can = (rawCan === true || rawCan === 1 || rawCan === "1" || rawCan === "TRUE" || rawCan === "true");
+
+          // If all six numeric fields are NA/null and we also cannot show weekly, hide the panel entirely
+          var hasAnyNumber = function(v){ return (v != null && !isNaN(v)); };
+          var anyRank = (hasAnyNumber(r.w) || hasAnyNumber(r.lw) || hasAnyNumber(r.ros) || hasAnyNumber(r.lros) || hasAnyNumber(r.dyn) || hasAnyNumber(r.ldyn));
+          if (!can && !anyRank) { clearPlayerRanks(); return; }
 
           var html = "";
-          // When can === false, show text and hide delta for the Weekly line
-          html += _rankRow("Weekly (PPR) Rankings",    r.w,   (("lw"   in r) ? r.lw   : null), { coming: can ? null : "Coming Tuesday", hideDelta: !can });
+          // Weekly: override with Coming Tuesday Afternoon when can === false; also hide delta arrow
+          html += _rankRow("Weekly (PPR) Rankings",    r.w,   (("lw"   in r) ? r.lw   : null), { coming: can ? null : "Coming Tuesday Afternoon", hideDelta: !can });
           html += _rankRow("Rest of Season Rankings",   r.ros, (("lros" in r) ? r.lros : null));
           html += _rankRow("Dynasty Rankings",          r.dyn, (("ldyn" in r) ? r.ldyn : null));
 
@@ -2039,7 +2071,7 @@
         $("#player-select").on("change", function(){
           var pid = _getSelectedPlayerId();
           renderPlayerNotes(pid);
-          renderPlayerRanks(pid);
+          try { renderPlayerRanks(pid); } catch(e) {}
         });
         // If the picker already has a value on load (e.g., persisted UI), render it
         (function(){
