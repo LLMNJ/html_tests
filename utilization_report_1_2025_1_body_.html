@@ -1897,40 +1897,59 @@
         function renderPlayerHeader(playerId){
           var wrap = document.getElementById("player-header");
           if(!wrap) return;
-          if(!playerId){ clearPlayerHeader(); return; }
-          var r = (window.playerRanks && window.playerRanks[playerId]) ? window.playerRanks[playerId][0] : null;
-          if(!r){ clearPlayerHeader(); return; }
-          function hasAnyRank(x){ return (x.w!=null)||(x.ros!=null)||(x.dyn!=null); }
-          if(r.can!==false && !hasAnyRank(r)){ clearPlayerHeader(); return; }
-          var chips = [];
-          function mk(label,value,delta,showDelta){
-            if(value==null) return "";
-            var dHtml="";
-            if(showDelta && typeof delta==="number" && !isNaN(delta)){
-              var cls = (delta>0) ? "down" : ((delta<0) ? "up" : "flat");
-              var arrow = (delta>0) ? "▼" : ((delta<0) ? "▲" : "–");
-              dHtml = (delta===0) ? ' <span class="rank-delta flat">–</span>' : ' <span class="rank-delta '+cls+'">'+arrow+Math.abs(delta)+'</span>';
+          wrap.innerHTML = "";
+
+          var pdata = window.playerRanks || {};
+          var arr = pdata && pdata[playerId] ? pdata[playerId] : null;
+          var r = (arr && arr.length) ? arr[0] : null;
+          if(!r){ wrap.classList.add("d-none"); return; }
+
+          var can = !!r.can; // weekly ranks allowed?
+
+          function chip(label, cur, prev, opts){
+            opts = opts || {};
+            if(opts.coming){
+              return [
+                "<div class=\"rank-chip\">",
+                  "<span class=\"label\">" + _escHtml(label) + ":</span>",
+                  "<span class=\"value\">" + _escHtml(opts.coming) + "</span>",
+                "</div>"
+              ].join("");
             }
-            return '<span class="rank-chip"><span class="label">'+label+'</span> <span class="value">'+value+'</span>'+dHtml+'</span>';
+            var curNum = (cur != null && cur !== "" ? Number(cur) : NaN);
+            var prevNum = (prev != null && prev !== "" ? Number(prev) : NaN);
+            var curTxt = (isFinite(curNum) ? String(curNum) : "—");
+            var deltaHtml = "";
+            if (isFinite(curNum) && isFinite(prevNum)) {
+              var d = curNum - prevNum;
+              if (d !== 0) {
+                var dir = (d < 0) ? "up" : "down";
+                var arrow = (d < 0) ? "▲" : "▼";
+                deltaHtml = " <span class=\"rank-delta " + dir + "\">" + arrow + " " + Math.abs(d) + "</span>";
+              } else {
+                deltaHtml = " <span class=\"rank-delta flat\">—</span>";
+              }
+            }
+            return [
+              "<div class=\"rank-chip\">",
+                "<span class=\"label\">" + _escHtml(label) + ":</span>",
+                "<span class=\"value\">" + curTxt + deltaHtml + "</span>",
+              "</div>"
+            ].join("");
           }
-          // Weekly
-          if(r.can===false){
-            chips.push(mk("Weekly","Coming Tuesday Afternoon",null,false));
-          } else if(r.w!=null){
-            var dw = (r.lw!=null) ? (r.w - r.lw) : null;
-            chips.push(mk("Weekly","#"+r.w,dw,true));
+
+          var parts = [];
+          // Weekly first — hide numbers if !can
+          if(!can){
+            parts.push(chip("Weekly (PPR) Rankings", null, null, {coming:"Coming Tuesday Afternoon"}));
+          } else {
+            parts.push(chip("Weekly (PPR) Rankings", r.w, r.lw));
           }
-          // ROS
-          if(r.ros!=null){
-            var dr = (r.lros!=null) ? (r.ros - r.lros) : null;
-            chips.push(mk("ROS","#"+r.ros,dr,true));
-          }
-          // Dynasty (no delta by design)
-          if(r.dyn!=null){
-            chips.push(mk("Dynasty","#"+r.dyn,null,false));
-          }
-          if(!chips.length){ clearPlayerHeader(); return; }
-          wrap.innerHTML = '<div class="player-header"><div class="ph-chips">'+chips.join("")+'</div></div>';
+          // ROS + Dynasty always shown
+          parts.push(chip("ROS Rankings", r.ros, r.lros));
+          parts.push(chip("Dynasty Rankings", r.dyn, r.ldyn));
+
+          wrap.innerHTML = "<div class=\"player-header\"><div class=\"ph-chips\">" + parts.join("") + "</div></div>";
           wrap.classList.remove("d-none");
         }
         function clearPlayerNotes(){
@@ -1996,35 +2015,37 @@
         function _rankRow(label, cur, prev, opts){
           opts = opts || {};
 
-          // If a "coming" message is provided (e.g., weekly ranks not yet available),
-          // show that message and ignore numbers/arrows entirely.
+          // If a "coming" message is provided, show that and ignore numbers/arrows.
           if (opts.coming) {
             return [
               "<div class=\"rank-row d-flex justify-content-between\">",
                 "<div class=\"rank-label\">" + _escHtml(label) + "</div>",
-                "<div class=\"rank-val\">" + _escHtml(opts.coming) + "</div>",
+                "<div class=\"rank-value\">" + _escHtml(opts.coming) + "</div>",
               "</div>"
             ].join("");
           }
 
           var showDelta = !opts.hideDelta;
-          var curNum = (cur != null ? Number(cur) : NaN);
-          var prevNum = (prev != null ? Number(prev) : NaN);
-          var curTxt = (isNaN(curNum) ? "—" : String(curNum));
+          var curNum = (cur != null && cur !== "" ? Number(cur) : NaN);
+          var prevNum = (prev != null && prev !== "" ? Number(prev) : NaN);
+          var curTxt = (isFinite(curNum) ? String(curNum) : "—");
 
-          var deltaTxt = "";
-          if (showDelta && !isNaN(prevNum) && !isNaN(curNum)) {
+          var deltaHtml = "";
+          if (showDelta && isFinite(curNum) && isFinite(prevNum)) {
             var d = curNum - prevNum;
             if (d !== 0) {
+              var dir = (d < 0) ? "up" : "down";
               var arrow = (d < 0) ? "▲" : "▼";
-              deltaTxt = " <span class=\"rank-delta\">" + arrow + " " + Math.abs(d) + "</span>";
+              deltaHtml = " <span class=\"rank-delta " + dir + " delta-badge\">" + arrow + " " + Math.abs(d) + "</span>";
+            } else {
+              deltaHtml = " <span class=\"rank-delta flat delta-badge\">—</span>";
             }
           }
 
           return [
             "<div class=\"rank-row d-flex justify-content-between\">",
               "<div class=\"rank-label\">" + _escHtml(label) + "</div>",
-              "<div class=\"rank-val\">" + curTxt + deltaTxt + "</div>",
+              "<div class=\"rank-value\">" + curTxt + deltaHtml + "</div>",
             "</div>"
           ].join("");
         }
@@ -2037,31 +2058,29 @@
         }
 
         function renderPlayerRanks(playerId){
-          // Only support league 1 (others won\'t have rankings data)
-          if (window.leagueId !== 1) { clearPlayerRanks(); return; }
-          var box = _el("player-ranks");
-          var rows = _el("player-ranks-rows");
-          if (!box || !rows) { return; }
+          var box = document.getElementById("player-ranks");
+          var rows = document.getElementById("player-ranks-rows");
+          if(!box || !rows) return;
+          rows.innerHTML = "";
 
-          var map = window.playerRanks || {};
-          var recs = map[String(playerId)];
-          if (!recs || !recs.length) { clearPlayerRanks(); return; }
+          var pdata = window.playerRanks || {};
+          var arr = pdata && pdata[playerId] ? pdata[playerId] : null;
+          var r = (arr && arr.length) ? arr[0] : null;
+          if(!r){ box.classList.add("d-none"); return; }
 
-          var r = recs[0] || {};
-          // Accept either r.can (JS alias) or r.can_include_rankings from JSON
-          var rawCan = (("can" in r) ? r.can : (("can_include_rankings" in r) ? r.can_include_rankings : null));
-          var can = (rawCan === true || rawCan === 1 || rawCan === "1" || rawCan === "TRUE" || rawCan === "true");
-
-          // If all six numeric fields are NA/null and we also cannot show weekly, hide the panel entirely
-          var hasAnyNumber = function(v){ return (v != null && !isNaN(v)); };
-          var anyRank = (hasAnyNumber(r.w) || hasAnyNumber(r.lw) || hasAnyNumber(r.ros) || hasAnyNumber(r.lros) || hasAnyNumber(r.dyn) || hasAnyNumber(r.ldyn));
-          if (!can && !anyRank) { clearPlayerRanks(); return; }
-
+          var can = !!r.can; // weekly ranks allowed?
           var html = "";
-          // Weekly: override with Coming Tuesday Afternoon when can === false; also hide delta arrow
-          html += _rankRow("Weekly (PPR) Rankings",    r.w,   (("lw"   in r) ? r.lw   : null), { coming: can ? null : "Coming Tuesday Afternoon", hideDelta: !can });
-          html += _rankRow("Rest of Season Rankings",   r.ros, (("lros" in r) ? r.lros : null));
-          html += _rankRow("Dynasty Rankings",          r.dyn, (("ldyn" in r) ? r.ldyn : null));
+
+          // Weekly — hide values if not allowed
+          if(!can){
+            html += _rankRow("Weekly (PPR) Rankings", null, null, { coming: "Coming Tuesday Afternoon" });
+          } else {
+            html += _rankRow("Weekly (PPR) Rankings", r.w, r.lw);
+          }
+
+          // ROS + Dynasty always shown (with deltas when available)
+          html += _rankRow("ROS Rankings", r.ros, r.lros);
+          html += _rankRow("Dynasty Rankings", r.dyn, r.ldyn);
 
           rows.innerHTML = html;
           box.classList.remove("d-none");
