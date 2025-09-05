@@ -1857,6 +1857,8 @@
           el.classList.add("d-none");
         }
         function renderPlayerNotes(playerId){
+          // Switching to a player: hide any team notes that might be visible
+          try{ clearTeamNotes(); }catch(e){}
           var el = document.getElementById("player-notes");
           if(!el){ return; }
           if(!playerId){ clearPlayerNotes(); return; }
@@ -1904,6 +1906,11 @@
           el.innerHTML = "";
           el.classList.add("d-none");
         }
+        // Clear both notes boxes
+        function hideAllNotes(){
+          try{ clearPlayerNotes(); }catch(e){}
+          try{ clearTeamNotes(); }catch(e){}
+        }
         function _canon(s){ return (s==null ? "" : String(s).trim().replace(/\s+/g," ").toLowerCase()); }
         function _sig(row){
           if(!row || !row.type) return "";
@@ -1915,6 +1922,8 @@
           var el = document.getElementById("team-notes");
           if(!el){ return; }
           if(!teamCode){ clearTeamNotes(); return; }
+          // Switching to a team: hide any player notes
+          try{ clearPlayerNotes(); }catch(e){}
           var all = window.playerNotes || {};
           var seen = new Set();
           var paras = [], bullets = [];
@@ -2067,6 +2076,8 @@
 
       $("#pick-player").on("click", function(e){
         e.preventDefault(); $(".dropdown-container").hide(); $("#player-dropdown").show();
+        // Switching to Player picker: hide any team notes
+        try{ clearTeamNotes(); }catch(_){}
         ensureSelect2("#player-select", "#player-dropdown", {
           placeholder: "-- choose --", allowClear: true, minimumInputLength: 1
         });
@@ -2075,6 +2086,8 @@
 
       $("#pick-team").on("click", function(e){
         e.preventDefault(); $(".dropdown-container").hide(); $("#team-dropdown").show();
+        // Switching to Team picker: hide any player notes
+        try{ clearPlayerNotes(); }catch(_){}
         populateTeamOptions();
         ensureSelect2("#team-select", "#team-dropdown", {
           minimumResultsForSearch: Infinity,  // hide search box
@@ -2085,6 +2098,8 @@
 
       $("#pick-position").on("click", function(e){
         e.preventDefault(); $(".dropdown-container").hide(); $("#position-dropdown").show();
+        // Position view has no notes: hide both immediately
+        try{ hideAllNotes(); }catch(_){}
         ensureSelect2("#position-select", "#position-dropdown", {
           minimumResultsForSearch: Infinity,  // hide search box
           placeholder: "-- choose --", allowClear: true
