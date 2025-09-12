@@ -22,7 +22,10 @@
     #example th:nth-child(5), #example td:nth-child(5) { white-space: normal; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
     #example th:nth-child(7), #example td:nth-child(7) { white-space: normal; line-height: 1.1; }
     /* Give Injury / Status breathing room so they never overlap */
-    #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) { min-width: 100px; }
+    #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) {
+      min-width: 100px; white-space: normal; overflow-wrap: anywhere; word-break: break-word; line-height: 1.15;
+      text-align: left;
+    }
     #example th:nth-child(9), #example td:nth-child(9), #example thead tr.filter-row th:nth-child(9) { min-width: 80px; }
     /* Header: keep sticky, allow wrapping, and make room for sort icons */
     #example thead th {
@@ -81,7 +84,7 @@
   </style>
 </head>
 <body class="p-4">
-  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Fri 09/12 09:27 AM ET</div>
+  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Fri 09/12 09:32 AM ET</div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <colgroup>
