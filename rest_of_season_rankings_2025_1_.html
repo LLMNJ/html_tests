@@ -13,12 +13,9 @@
     body, table { font-family: 'Archivo', sans-serif; }
     .table-responsive { overflow: visible; }
     #example th, #example td { text-align: center; }
-    #example thead th {
-      position: sticky;
-      top: 0;
-      background-color: #f8f9fa;
-      z-index: 2;
-    }
+    #example thead th { position: sticky; background-color:#f8f9fa; z-index:2; }
+    #example thead tr:nth-child(1) th { top: 0; }
+    #example thead tr.filter-row th { top: 36px; }
     #example .filter-row input, #example .filter-row select { width: 100%; box-sizing: border-box; text-align: center; }
     #example a { color: #0d6efd; text-decoration: none; }
     #example a:hover { text-decoration: underline; }
@@ -46,7 +43,7 @@
   </style>
 </head>
 <body class="p-4">
-  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Thu 09/11 06:38 PM ET</div>
+  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Fri 09/12 10:02 AM ET</div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <thead class="table-light">
@@ -56,14 +53,14 @@
           <th>Name</th>
           <th>Team</th>
         </tr>
+        <tr class="filter-row">
+          <th></th>
+          <th></th>
+          <th><input type="text" class="form-control form-control-sm text-center" placeholder="Filter"></th>
+          <th></th>
+        </tr>
       </thead>
       <tbody>
-        <tr class="filter-row">
-          <td></td>
-          <td></td>
-          <td><input type="text" class="form-control form-control-sm text-center" placeholder="Filter"></td>
-          <td></td>
-        </tr>
 <tr>
   <td>  1</td>
   <td>WR</td>
@@ -792,405 +789,405 @@
 </tr>
 <tr>
   <td>122</td>
-  <td>RB</td>
-  <td><a href="https://www.pff.com/nfl/players/austin-ekeler/12164">Austin Ekeler</a></td>
-  <td><a href="https://www.pff.com/nfl/teams/washington-commanders/32">Commanders</a></td>
-</tr>
-<tr>
-  <td>123</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/hunter-henry/10669">Hunter Henry</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
 </tr>
 <tr>
-  <td>124</td>
+  <td>123</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/cam-skattebo/147787">Cam Skattebo</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-york-giants/21">Giants</a></td>
 </tr>
 <tr>
-  <td>125</td>
+  <td>124</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/trey-benson/131705">Trey Benson</a></td>
   <td><a href="https://www.pff.com/nfl/teams/arizona-cardinals/1">Cardinals</a></td>
 </tr>
 <tr>
-  <td>126</td>
+  <td>125</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/bhayshul-tuten/150568">Bhayshul Tuten</a></td>
   <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
 </tr>
 <tr>
-  <td>127</td>
+  <td>126</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/marquise-brown/61568">Hollywood Brown</a></td>
   <td><a href="https://www.pff.com/nfl/teams/kansas-city-chiefs/16">Chiefs</a></td>
 </tr>
 <tr>
-  <td>128</td>
+  <td>127</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/kayshon-boutte/124087">Kayshon Boutte</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
 </tr>
 <tr>
-  <td>129</td>
+  <td>128</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/christian-kirk/47546">Christian Kirk</a></td>
   <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
 </tr>
 <tr>
-  <td>130</td>
+  <td>129</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/keenan-allen/7857">Keenan Allen</a></td>
   <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
 </tr>
 <tr>
-  <td>131</td>
+  <td>130</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/kyle-monangai/129891">Kyle Monangai</a></td>
   <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
 </tr>
 <tr>
-  <td>132</td>
+  <td>131</td>
   <td>QB</td>
   <td><a href="https://www.pff.com/nfl/players/drake-maye/143969">Drake Maye</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
 </tr>
 <tr>
-  <td>133</td>
+  <td>132</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/braelon-allen/145159">Braelon Allen</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-york-jets/22">Jets</a></td>
 </tr>
 <tr>
-  <td>134</td>
+  <td>133</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/brandon-aiyuk/84109">Brandon Aiyuk</a></td>
   <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
 </tr>
 <tr>
-  <td>135</td>
+  <td>134</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/tyler-allgeier/83639">Tyler Allgeier</a></td>
   <td><a href="https://www.pff.com/nfl/teams/atlanta-falcons/2">Falcons</a></td>
 </tr>
 <tr>
-  <td>136</td>
+  <td>135</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/troy-franklin/146567">Troy Franklin</a></td>
   <td><a href="https://www.pff.com/nfl/teams/denver-broncos/10">Broncos</a></td>
 </tr>
 <tr>
-  <td>137</td>
+  <td>136</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/kaleb-johnson/156419">Kaleb Johnson</a></td>
   <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
 </tr>
 <tr>
-  <td>138</td>
+  <td>137</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/cooper-kupp/11824">Cooper Kupp</a></td>
   <td><a href="https://www.pff.com/nfl/teams/seattle-seahawks/29">Seahawks</a></td>
 </tr>
 <tr>
-  <td>139</td>
+  <td>138</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/brenton-strange/101694">Brenton Strange</a></td>
   <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
 </tr>
 <tr>
-  <td>140</td>
+  <td>139</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/wandale-robinson/101735">Wan'Dale Robinson</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-york-giants/21">Giants</a></td>
 </tr>
 <tr>
-  <td>141</td>
-  <td>WR</td>
-  <td><a href="https://www.pff.com/nfl/players/jayden-reed/78171">Jayden Reed</a></td>
-  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
-</tr>
-<tr>
-  <td>142</td>
+  <td>140</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/jaydon-blue/157303">Jaydon Blue</a></td>
   <td><a href="https://www.pff.com/nfl/teams/dallas-cowboys/9">Cowboys</a></td>
 </tr>
 <tr>
-  <td>143</td>
+  <td>141</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/marvin-mims-jr/122937">Marvin Mims Jr.</a></td>
   <td><a href="https://www.pff.com/nfl/teams/denver-broncos/10">Broncos</a></td>
 </tr>
 <tr>
-  <td>144</td>
+  <td>142</td>
   <td>QB</td>
   <td><a href="https://www.pff.com/nfl/players/cj-stroud/129759">C.J. Stroud</a></td>
   <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
 </tr>
 <tr>
-  <td>145</td>
+  <td>143</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/tyjae-spears/97195">Tyjae Spears</a></td>
   <td><a href="https://www.pff.com/nfl/teams/tennessee-titans/31">Titans</a></td>
 </tr>
 <tr>
-  <td>146</td>
+  <td>144</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/rashid-shaheed/63707">Rashid Shaheed</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-orleans-saints/20">Saints</a></td>
 </tr>
 <tr>
-  <td>147</td>
+  <td>145</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/ray-davis/101072">Ray Davis</a></td>
   <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
 </tr>
 <tr>
-  <td>148</td>
+  <td>146</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/romeo-doubs/84329">Romeo Doubs</a></td>
   <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
 </tr>
 <tr>
-  <td>149</td>
+  <td>147</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/brian-robinson/57120">Brian Robinson Jr.</a></td>
   <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
 </tr>
 <tr>
-  <td>150</td>
+  <td>148</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/demario-douglas/104155">DeMario Douglas</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
 </tr>
 <tr>
-  <td>151</td>
+  <td>149</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/rachaad-white/131633">Rachaad White</a></td>
   <td><a href="https://www.pff.com/nfl/teams/tampa-bay-buccaneers/30">Buccaneers</a></td>
 </tr>
 <tr>
-  <td>152</td>
+  <td>150</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/rashod-bateman/84296">Rashod Bateman</a></td>
   <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
 </tr>
 <tr>
-  <td>153</td>
+  <td>151</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/jake-ferguson/61081">Jake Ferguson</a></td>
   <td><a href="https://www.pff.com/nfl/teams/dallas-cowboys/9">Cowboys</a></td>
 </tr>
 <tr>
-  <td>154</td>
+  <td>152</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/joshua-palmer/62979">Joshua Palmer</a></td>
   <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
 </tr>
 <tr>
-  <td>155</td>
+  <td>153</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/tahj-brooks/123133">Tahj Brooks</a></td>
   <td><a href="https://www.pff.com/nfl/teams/cincinnati-bengals/7">Bengals</a></td>
 </tr>
 <tr>
-  <td>156</td>
+  <td>154</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/najee-harris/57121">Najee Harris</a></td>
   <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
 </tr>
 <tr>
-  <td>157</td>
+  <td>155</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/rico-dowdle/40693">Rico Dowdle</a></td>
   <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
 </tr>
 <tr>
-  <td>158</td>
+  <td>156</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/keaton-mitchell/123826">Keaton Mitchell</a></td>
   <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
 </tr>
 <tr>
-  <td>159</td>
+  <td>157</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/cedric-tillman/84434">Cedric Tillman</a></td>
   <td><a href="https://www.pff.com/nfl/teams/cleveland-browns/8">Browns</a></td>
 </tr>
 <tr>
-  <td>160</td>
+  <td>158</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/harold-fannin-jr/163104">Harold Fannin Jr.</a></td>
   <td><a href="https://www.pff.com/nfl/teams/cleveland-browns/8">Browns</a></td>
 </tr>
 <tr>
-  <td>161</td>
+  <td>159</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/dj-giddens/144595">D.J. Giddens</a></td>
   <td><a href="https://www.pff.com/nfl/teams/indianapolis-colts/14">Colts</a></td>
 </tr>
 <tr>
-  <td>162</td>
+  <td>160</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/jerome-ford/83601">Jerome Ford</a></td>
   <td><a href="https://www.pff.com/nfl/teams/cleveland-browns/8">Browns</a></td>
 </tr>
 <tr>
-  <td>163</td>
+  <td>161</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/tank-bigsby/123974">Tank Bigsby</a></td>
   <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
 </tr>
 <tr>
-  <td>164</td>
+  <td>162</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/xavier-legette/99197">Xavier Legette</a></td>
   <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
 </tr>
 <tr>
-  <td>165</td>
+  <td>163</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/chigoziem-okonkwo/84000">Chig Okonkwo</a></td>
   <td><a href="https://www.pff.com/nfl/teams/tennessee-titans/31">Titans</a></td>
 </tr>
 <tr>
-  <td>166</td>
+  <td>164</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/deandre-hopkins/7808">DeAndre Hopkins</a></td>
   <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
 </tr>
 <tr>
-  <td>167</td>
+  <td>165</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/jalen-coker/143068">Jalen Coker</a></td>
   <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
 </tr>
 <tr>
-  <td>168</td>
+  <td>166</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/kendre-miller/123091">Kendre Miller</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-orleans-saints/20">Saints</a></td>
 </tr>
 <tr>
-  <td>169</td>
+  <td>167</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/donte-thornton-jr/146547">Dont'e Thornton Jr.</a></td>
   <td><a href="https://www.pff.com/nfl/teams/las-vegas-raiders/23">Raiders</a></td>
 </tr>
 <tr>
-  <td>170</td>
+  <td>168</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/kyle-pitts/83964">Kyle Pitts Sr.</a></td>
   <td><a href="https://www.pff.com/nfl/teams/atlanta-falcons/2">Falcons</a></td>
 </tr>
 <tr>
-  <td>171</td>
+  <td>169</td>
   <td>TE</td>
   <td><a href="https://www.pff.com/nfl/players/mason-taylor/157122">Mason Taylor</a></td>
   <td><a href="https://www.pff.com/nfl/teams/new-york-jets/22">Jets</a></td>
 </tr>
 <tr>
-  <td>172</td>
+  <td>170</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/jayden-higgins/150240">Jayden Higgins</a></td>
   <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
 </tr>
 <tr>
-  <td>173</td>
+  <td>171</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/roschon-johnson/99467">Roschon Johnson</a></td>
   <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
 </tr>
 <tr>
-  <td>174</td>
+  <td>172</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/luther-burden-iii/157170">Luther Burden III</a></td>
   <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
 </tr>
 <tr>
-  <td>175</td>
+  <td>173</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/joe-mixon/11803">Joe Mixon</a></td>
   <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
 </tr>
 <tr>
-  <td>176</td>
+  <td>174</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/tre-tucker/101106">Tre Tucker</a></td>
   <td><a href="https://www.pff.com/nfl/teams/las-vegas-raiders/23">Raiders</a></td>
 </tr>
 <tr>
-  <td>177</td>
+  <td>175</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/miles-sanders/40555">Miles Sanders</a></td>
   <td><a href="https://www.pff.com/nfl/teams/dallas-cowboys/9">Cowboys</a></td>
 </tr>
 <tr>
-  <td>178</td>
+  <td>176</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/tutu-atwell/77965">Tutu Atwell</a></td>
   <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
 </tr>
 <tr>
-  <td>179</td>
+  <td>177</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/tyler-lockett/9502">Tyler Lockett</a></td>
   <td><a href="https://www.pff.com/nfl/teams/tennessee-titans/31">Titans</a></td>
 </tr>
 <tr>
-  <td>180</td>
+  <td>178</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/dameon-pierce/83659">Dameon Pierce</a></td>
   <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
 </tr>
 <tr>
-  <td>181</td>
+  <td>179</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/blake-corum/129574">Blake Corum</a></td>
   <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
 </tr>
 <tr>
-  <td>182</td>
+  <td>180</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/alec-pierce/78038">Alec Pierce</a></td>
   <td><a href="https://www.pff.com/nfl/teams/indianapolis-colts/14">Colts</a></td>
 </tr>
 <tr>
-  <td>183</td>
+  <td>181</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/dyami-brown/77986">Dyami Brown</a></td>
   <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
 </tr>
 <tr>
-  <td>184</td>
+  <td>182</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/ollie-gordon-ii/157792">Ollie Gordon II</a></td>
   <td><a href="https://www.pff.com/nfl/teams/miami-dolphins/17">Dolphins</a></td>
 </tr>
 <tr>
-  <td>185</td>
+  <td>183</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/zamir-white/83665">Zamir White</a></td>
   <td><a href="https://www.pff.com/nfl/teams/las-vegas-raiders/23">Raiders</a></td>
 </tr>
 <tr>
-  <td>186</td>
+  <td>184</td>
   <td>WR</td>
   <td><a href="https://www.pff.com/nfl/players/michael-wilson/84423">Michael Wilson</a></td>
   <td><a href="https://www.pff.com/nfl/teams/arizona-cardinals/1">Cardinals</a></td>
 </tr>
 <tr>
-  <td>187</td>
+  <td>185</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/justice-hill/45865">Justice Hill</a></td>
   <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
 </tr>
 <tr>
-  <td>188</td>
+  <td>186</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/dontayvion-wicks/99711">Dontayvion Wicks</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+</tr>
+<tr>
+  <td>187</td>
   <td>RB</td>
   <td><a href="https://www.pff.com/nfl/players/kareem-hunt/11841">Kareem Hunt</a></td>
   <td><a href="https://www.pff.com/nfl/teams/kansas-city-chiefs/16">Chiefs</a></td>
+</tr>
+<tr>
+  <td>188</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/isaiah-davis/138299">Isaiah Davis</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-york-jets/22">Jets</a></td>
 </tr>
 <tr>
   <td>189</td>
@@ -1255,7 +1252,7 @@
         sel.on("change", function() {
           col.search(this.value ? "^" + this.value + "$" : "", true, false).draw();
         });
-        $("#example .filter-row td").eq(colIndex).append(sel);
+        $("#example thead tr.filter-row th").eq(colIndex).append(sel);
       }
       addDropdown(1, "Filter");
       addDropdown(3, "Filter");
