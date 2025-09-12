@@ -17,9 +17,10 @@
     /* Base cell styling: keep most columns on one line so widths behave */
     #example th, #example td { text-align: center; padding: 0.35rem 0.35rem; font-size: 14px; white-space: nowrap; }
     /* Name column: allow wrap + left align so it can give space to Injury/Status */
-    #example th:nth-child(4), #example td:nth-child(4) {
-      white-space: normal; word-break: break-word; hyphens: auto; text-align: left;
-    }
+    /* Name + Team wrap to free space; Start wraps to 2 lines if needed */
+    #example th:nth-child(4), #example td:nth-child(4) { white-space: normal; word-break: break-word; hyphens: auto; text-align: left; }
+    #example th:nth-child(5), #example td:nth-child(5) { white-space: normal; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+    #example th:nth-child(7), #example td:nth-child(7) { white-space: normal; line-height: 1.1; }
     /* Give Injury / Status breathing room so they never overlap */
     #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) { min-width: 100px; }
     #example th:nth-child(9), #example td:nth-child(9), #example thead tr.filter-row th:nth-child(9) { min-width: 80px; }
@@ -63,7 +64,8 @@
       #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) { display: none; }
       #example th:nth-child(9), #example td:nth-child(9), #example thead tr.filter-row th:nth-child(9) { display: none; }
       #example th, #example td { font-size: 11px; padding: 2px; white-space: nowrap; }
-      #example th:nth-child(4), #example td:nth-child(4) { white-space: normal; }
+      #example th:nth-child(4), #example td:nth-child(4),
+      #example th:nth-child(5), #example td:nth-child(5) { white-space: normal; }
       #example thead .filter-dd .btn { width: auto !important; max-width: 100%; font-size: 11px; padding: 0.2rem 0.35rem; }
       .desktop-label { display: none; }
       .mobile-label { display: inline; }
@@ -79,19 +81,19 @@
   </style>
 </head>
 <body class="p-4">
-  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Fri 09/12 09:15 AM ET</div>
+  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Fri 09/12 09:24 AM ET</div>
   <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
       <colgroup>
         <col style="width:6%;">
         <col style="width:6%;">
         <col style="width:6%;">
-        <col style="width:18%;">
-        <col style="width:12%;">
-        <col style="width:12%;">
         <col style="width:16%;">
+        <col style="width:13%;">
         <col style="width:12%;">
-        <col style="width:12%;">
+        <col style="width:15%;">
+        <col style="width:13%;">
+        <col style="width:13%;">
       </colgroup>
       <thead class="table-light">
         <tr>
