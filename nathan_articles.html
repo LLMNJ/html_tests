@@ -2,37 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Explore Articles by Nathan Jahnke</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Explore Articles by Nathan Jahnke</title>
   <style>
     :root { --bg:#0b1530; --btn:#1677ff; --txt:#ffffff; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { width:100%; margin:0; padding:0; overflow-x:hidden; background:transparent; }
     body, table { font-family: 'Archivo', sans-serif; }
-    /* Transparent outside so host page shows through */
-    body { background: transparent; margin:0; display:grid; place-items:center; min-height:100vh; }
-    /* Side padding ensures curves are visible on both sides inside iframes */
-    .page { width:100%; padding:16px; box-sizing:border-box; display:flex; justify-content:center; }
-    .card { background:var(--bg); color:var(--txt); border-radius:16px; overflow:hidden;             box-shadow:0 8px 28px rgba(0,0,0,.35); width:min(1100px, 100%); padding:24px; }
-    h1 { margin:0 0 16px; font-weight:700; text-align:center; }
-    .grid { width:100%; border-collapse:separate; border-spacing:18px 12px; }
-    thead th { text-align:center; font-weight:600; font-size:18px; padding:6px 2px 8px; }
-    tbody td { text-align:center; vertical-align:top; }
-    .btnrow { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-    a.btn { display:inline-block; background:var(--btn); color:#fff; text-decoration:none;             padding:10px 14px; border-radius:12px; line-height:1.1;             box-shadow:0 2px 6px rgba(0,0,0,.25); transition:transform .05s; white-space:nowrap; }
-    a.btn:hover { transform:translateY(-1px); }
+    .wrap { max-width: 960px; width:100%; margin: 20px auto; padding: 0 12px; }
+    .card { background:var(--bg); color:var(--txt); border-radius:18px;             box-shadow:0 14px 30px rgba(0,0,0,.25);             padding:clamp(16px,3vw,28px); }
+    h1 { margin:0 0 14px; font-weight:700; text-align:center;          font-size:clamp(22px,5vw,38px); }
+    /* 3 equal columns that always fit container width */
+    .grid { width:100%; table-layout:fixed; border-collapse:separate;             border-spacing:clamp(8px,1.5vw,16px) clamp(8px,1.2vw,12px); }
+    thead th { text-align:center; font-weight:600;                font-size:clamp(14px,2.4vw,18px); padding:4px 2px 8px; }
+    tbody td { vertical-align:top; width:33.333%; }
+    .cell { display:flex; flex-direction:column; align-items:center;              gap:clamp(8px,1.6vw,14px); }
+    a.btn { display:inline-block; background:var(--btn); color:#fff; text-decoration:none;             padding:clamp(8px,1.8vw,12px) clamp(12px,2.4vw,16px);             border-radius:12px; line-height:1.15;             box-shadow:0 2px 6px rgba(0,0,0,.25);             font-size:clamp(12px,2.2vw,16px); max-width:100%; word-break:break-word; }
+    a.btn:hover { transform: translateY(-1px); }
+    /* tighten spacing further on small phones */
+    @media (max-width:640px) {
+      .wrap { padding:0 8px; }
+      .grid { border-spacing:10px 8px; }
+    }
   </style>
 </head>
 <body>
-  <div class="page">
+  <div class="wrap">
     <div class="card">
       <h1>Explore Articles by Nathan Jahnke</h1>
       <table class="grid">
         <thead><tr><th>Recaps</th><th>Rankings</th><th>Looking Ahead</th></tr></thead>
-        <tbody><tr><td><div class="btnrow"><a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-week-2-game-recap-immediate-fantasy-football-takeaways-from-thursdays-game" target="_blank" rel="noopener">TNF</a> <a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-week-1-recap-immediate-fantasy-football-takeaways-from-sundays-games-2025" target="_blank" rel="noopener">Sunday</a> <a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-week-2-game-recap-immediate-fantasy-football-takeaways-from-thursdays-game" target="_blank" rel="noopener">MNF</a></div></td><td><a class="btn" href="https://www.pff.com/news/fantasy-football-rankings-2025-week-2" target="_blank" rel="noopener">Weekly</a></td><td><a class="btn" href="https://www.pff.com/news/fantasy-football-waiver-wire-pickups-nfl-week-2" target="_blank" rel="noopener">Waivers</a></td></tr>
-<tr><td><a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-usage-production-report-week-1" target="_blank" rel="noopener">Usage &amp; Production</a></td><td><a class="btn" href="https://www.pff.com/news/fantasy-football-rest-of-season-fantasy-football-rankings-following-nfl-week-1-2025" target="_blank" rel="noopener">Rest of Season</a></td><td><a class="btn" href="https://www.pff.com/news/fantasy-football-week-2-5-to-waiver-wire-add-5-to-drop-5-to-buy-low-5-to-sell-high-2025" target="_blank" rel="noopener">5 to Add/Drop/Buy/Sell</a></td></tr>
-<tr><td><a class="btn" href="https://www.pff.com/news/college-usage-and-production-report-week-2" target="_blank" rel="noopener">College Usage &amp; Production</a></td><td><a class="btn" href="https://www.pff.com/news/fantasy-football-rankings-2025-dynasty-week-1" target="_blank" rel="noopener">Dynasty</a></td><td><a class="btn" href="https://www.pff.com/news/fantasy-football-start-sit-advice-week-2-2025" target="_blank" rel="noopener">Start/Sit</a></td></tr></tbody>
+        <tbody><tr><td><div class='cell'><div class="btnrow"><a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-week-2-game-recap-immediate-fantasy-football-takeaways-from-thursdays-game" target="_blank" rel="noopener">TNF</a> <a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-week-1-recap-immediate-fantasy-football-takeaways-from-sundays-games-2025" target="_blank" rel="noopener">Sunday</a> <a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-week-2-game-recap-immediate-fantasy-football-takeaways-from-thursdays-game" target="_blank" rel="noopener">MNF</a></div></div></td><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-rankings-2025-week-2" target="_blank" rel="noopener">Weekly</a></div></td><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-waiver-wire-pickups-nfl-week-2" target="_blank" rel="noopener">Waivers</a></div></td></tr>
+<tr><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-nfl-usage-production-report-week-1" target="_blank" rel="noopener">Usage &amp; Production</a></div></td><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-rest-of-season-fantasy-football-rankings-following-nfl-week-1-2025" target="_blank" rel="noopener">Rest of Season</a></div></td><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-week-2-5-to-waiver-wire-add-5-to-drop-5-to-buy-low-5-to-sell-high-2025" target="_blank" rel="noopener">5 to Add/Drop/Buy/Sell</a></div></td></tr>
+<tr><td><div class='cell'><a class="btn" href="https://www.pff.com/news/college-usage-and-production-report-week-2" target="_blank" rel="noopener">College Usage &amp; Production</a></div></td><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-rankings-2025-dynasty-week-1" target="_blank" rel="noopener">Dynasty</a></div></td><td><div class='cell'><a class="btn" href="https://www.pff.com/news/fantasy-football-start-sit-advice-week-2-2025" target="_blank" rel="noopener">Start/Sit</a></div></td></tr></tbody>
       </table>
     </div>
   </div>
