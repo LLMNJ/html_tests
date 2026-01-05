@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Fantasy Rankings 2025 Week 28</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+  <style>
+    body, table { font-family: 'Archivo', sans-serif; }
+    .table-responsive { overflow-x: visible; }
+    .dt-buttons { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+    .dt-buttons .btn { width: auto !important; display: inline-block; padding: 0.35rem 0.6rem; font-size: 0.875rem; }
+    #example { table-layout: fixed; width: 100%; }
+    /* Base cell styling: keep most columns on one line so widths behave */
+    #example th, #example td { text-align: center; padding: 0.35rem 0.35rem; font-size: 14px; white-space: nowrap; }
+    /* Name column: allow wrap + left align so it can give space to Injury/Status */
+    /* Name + Team wrap to free space; Start wraps to 2 lines if needed */
+    #example th:nth-child(4), #example td:nth-child(4) { white-space: normal; word-break: break-word; hyphens: auto; text-align: left; }
+    #example th:nth-child(5), #example td:nth-child(5) { white-space: normal; overflow-wrap: anywhere; word-break: break-word; text-align: left; }
+    #example th:nth-child(7), #example td:nth-child(7) { white-space: normal; line-height: 1.1; }
+    /* Give Injury / Status breathing room so they never overlap */
+    #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) {
+      min-width: 100px; white-space: normal; overflow-wrap: anywhere; word-break: break-word; line-height: 1.15;
+      text-align: left;
+    }
+    #example th:nth-child(9), #example td:nth-child(9), #example thead tr.filter-row th:nth-child(9) { min-width: 80px; }
+    /* Header: keep sticky, allow wrapping, and make room for sort icons */
+    #example thead th {
+      position: sticky; top: 0; background-color: #f8f9fa; z-index: 2;
+      white-space: normal; overflow: visible; line-height: 1.15; font-size: 13px;
+      padding-right: 1.6rem; /* space for sort icons so text isn't clipped */
+    }
+    /* Bring DataTables sort icons in a bit and keep them from overlapping text */
+    table.dataTable thead > tr > th.sorting:before,
+    table.dataTable thead > tr > th.sorting:after,
+    table.dataTable thead > tr > th.sorting_asc:before,
+    table.dataTable thead > tr > th.sorting_asc:after,
+    table.dataTable thead > tr > th.sorting_desc:before,
+    table.dataTable thead > tr > th.sorting_desc:after { right: .35rem; }
+    /* Filter row layout: keep controls inside the cells */
+    #example thead tr.filter-row th { padding: 4px 4px !important; }
+    #example thead tr.filter-row th * { box-sizing: border-box; }
+    #example thead .form-control { width: 100%; min-width: 0; padding: 0.2rem 0.35rem; height: 28px; font-size: 12px; }
+    #example thead .filter-dd { width: 100%; }
+    #example thead .filter-dd .btn {
+      display: block; width: 100%; max-width: 100%;
+      padding: 0.2rem 0.5rem; height: 28px; font-size: 12px; line-height: 1.1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #example thead .filter-dd .dropdown-toggle::after { transform: scale(0.9); }
+    #example a { color: #0d6efd; text-decoration: none; }
+    #example a:hover { text-decoration: underline; }
+    .dataTables_filter { display: none; }
+    .desktop-label { display: inline; }
+    .mobile-label { display: none; }
+    .filter-dd .dropdown-menu { min-width: 200px; max-height: 260px; overflow: auto; }
+    .filter-dd .form-check { margin-bottom: 4px; }
+    /* MOBILE (<=576px): hide a few columns and compact controls */
+    @media (max-width: 576px) {
+      #example { table-layout: auto; }
+      #example col { width: auto !important; }
+      #example th:nth-child(1), #example td:nth-child(1), #example thead tr.filter-row th:nth-child(1) { display: none; }
+      #example th:nth-child(7), #example td:nth-child(7), #example thead tr.filter-row th:nth-child(7) { display: none; }
+      #example th:nth-child(8), #example td:nth-child(8), #example thead tr.filter-row th:nth-child(8) { display: none; }
+      #example th:nth-child(9), #example td:nth-child(9), #example thead tr.filter-row th:nth-child(9) { display: none; }
+      #example th, #example td { font-size: 11px; padding: 2px; white-space: nowrap; }
+      #example th:nth-child(4), #example td:nth-child(4),
+      #example th:nth-child(5), #example td:nth-child(5) { white-space: normal; }
+      #example thead .filter-dd .btn { width: auto !important; max-width: 100%; font-size: 11px; padding: 0.2rem 0.35rem; }
+      .desktop-label { display: none; }
+      .mobile-label { display: inline; }
+    }
+    /* Print: hide controls/filters and fit table */
+    @media print {
+      .dt-buttons, .filter-dd, .dataTables_info { display: none !important; }
+      #example thead tr.filter-row { display: none !important; }
+      #example { table-layout: auto !important; width: 100% !important; }
+      #example th, #example td { font-size: 11pt; padding: 4px 6px; }
+      #last-updated-block { margin-bottom: 8px; font-size: 12pt; }
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div id="last-updated-block" class="mb-2"><strong>Last Updated:</strong> Sun 01/04 11:58 PM ET</div>
+  <div class="table-responsive">
+    <table id="example" class="table table-striped table-hover">
+      <colgroup>
+        <col style="width:6%;">
+        <col style="width:6%;">
+        <col style="width:6%;">
+        <col style="width:16%;">
+        <col style="width:15%;">
+        <col style="width:15%;">
+        <col style="width:15%;">
+        <col style="width:13%;">
+        <col style="width:8%;">
+      </colgroup>
+      <thead class="table-light">
+        <tr>
+          <th><span class="desktop-label">Ovr. Rank</span><span class="mobile-label">Rk.</span></th>
+          <th><span class="desktop-label">Pos Rank</span><span class="mobile-label">PRk</span></th>
+          <th><span class="desktop-label">Pos.</span><span class="mobile-label">Pos.</span></th>
+          <th>Name</th>
+          <th>Team</th>
+          <th>Opponent</th>
+          <th>Start (ET)</th>
+          <th>Injury</th>
+          <th>Status</th>
+        </tr>
+        <tr class="filter-row">
+          <th></th>
+          <th></th>
+          <th></th>
+          <th><input type="text" class="form-control form-control-sm text-center" placeholder="Filter" data-key="name"></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+<tr>
+  <td data-order="1">1</td>
+  <td data-order="1"> 1</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/kendrick-bourne/12270">Kendrick Bourne</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="2">2</td>
+  <td data-order="1"> 1</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/christian-mccaffrey/11763">Christian McCaffrey</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="3">3</td>
+  <td data-order="2"> 2</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kyren-williams/97118">Kyren Williams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="4">4</td>
+  <td data-order="1"> 1</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/josh-allen/46601">Josh Allen</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="5">5</td>
+  <td data-order="2"> 2</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/jalen-hurts/40291">Jalen Hurts</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="6">6</td>
+  <td data-order="2"> 2</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/xavier-hutchinson/122518">Xavier Hutchinson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="7">7</td>
+  <td data-order="3"> 3</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/james-cook/83666">James Cook III</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="8">8</td>
+  <td data-order="3"> 3</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/matthew-stafford/4924">Matthew Stafford</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9">9</td>
+  <td data-order="4"> 4</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/drake-maye/143969">Drake Maye</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="10">10</td>
+  <td data-order="3"> 3</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/demarcus-robinson/10760">Demarcus Robinson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="11">11</td>
+  <td data-order="5"> 5</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/trevor-lawrence/77632">Trevor Lawrence</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="12">12</td>
+  <td data-order="6"> 6</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/brock-purdy/77672">Brock Purdy</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="13">13</td>
+  <td data-order="7"> 7</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/caleb-williams/144622">Caleb Williams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="14">14</td>
+  <td data-order="4"> 4</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/josh-jacobs/45953">Josh Jacobs</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="15">15</td>
+  <td data-order="8"> 8</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/jordan-love/40306">Jordan Love</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="16">16</td>
+  <td data-order="9"> 9</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/justin-herbert/28237">Justin Herbert</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="17">17</td>
+  <td data-order="10">10</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/cj-stroud/129759">C.J. Stroud</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="18">18</td>
+  <td data-order="4"> 4</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/puka-nacua/100632">Puka Nacua</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="19">19</td>
+  <td data-order="11">11</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/bryce-young/123943">Bryce Young</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="20">20</td>
+  <td data-order="5"> 5</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/nico-collins/61441">Nico Collins</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="21">21</td>
+  <td data-order="12">12</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/aaron-rodgers/2241">Aaron Rodgers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="22">22</td>
+  <td data-order="5"> 5</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/saquon-barkley/45791">Saquon Barkley</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="23">23</td>
+  <td data-order="1"> 1</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/dallas-goedert/47272">Dallas Goedert</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="24">24</td>
+  <td data-order="6"> 6</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/travis-etienne-jr/57185">Travis Etienne Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="25">25</td>
+  <td data-order="7"> 7</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/dandre-swift/57212">D'Andre Swift</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="26">26</td>
+  <td data-order="6"> 6</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/aj-brown/48327">A.J. Brown</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="27">27</td>
+  <td data-order="7"> 7</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/davante-adams/8688">Davante Adams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="28">28</td>
+  <td data-order="8"> 8</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kenneth-gainwell/77737">Kenneth Gainwell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="29">29</td>
+  <td data-order="9"> 9</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/rico-dowdle/40693">Rico Dowdle</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="30">30</td>
+  <td data-order="10">10</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/rhamondre-stevenson/98689">Rhamondre Stevenson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="31">31</td>
+  <td data-order="11">11</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/omarion-hampton/162750">Omarion Hampton</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="32">32</td>
+  <td data-order="12">12</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/treveyon-henderson/145059">TreVeyon Henderson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="33">33</td>
+  <td data-order="8"> 8</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/christian-watson/66581">Christian Watson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="34">34</td>
+  <td data-order="9"> 9</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/tetairoa-mcmillan/158735">Tetairoa McMillan</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="35">35</td>
+  <td data-order="10">10</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jayden-higgins/150240">Jayden Higgins</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="36">36</td>
+  <td data-order="2"> 2</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/george-kittle/11901">George Kittle</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="37">37</td>
+  <td data-order="11">11</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/parker-washington/129799">Parker Washington</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="38">38</td>
+  <td data-order="12">12</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/devonta-smith/61100">DeVonta Smith</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="39">39</td>
+  <td data-order="13">13</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/blake-corum/129574">Blake Corum</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="40">40</td>
+  <td data-order="13">13</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/romeo-doubs/84329">Romeo Doubs</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="41">41</td>
+  <td data-order="14">14</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/quentin-johnston/123085">Quentin Johnston</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="42">42</td>
+  <td data-order="3"> 3</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/dalton-kincaid/91791">Dalton Kincaid</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="43">43</td>
+  <td data-order="14">14</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jaylen-warren/98692">Jaylen Warren</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="44">44</td>
+  <td data-order="15">15</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/luther-burden-iii/157170">Luther Burden III</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="45">45</td>
+  <td data-order="15">15</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/woody-marks/124179">Woody Marks</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="46">46</td>
+  <td data-order="16">16</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/stefon-diggs/9579">Stefon Diggs</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="47">47</td>
+  <td data-order="17">17</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jakobi-meyers/47468">Jakobi Meyers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="48">48</td>
+  <td data-order="18">18</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/dk-metcalf/47864">D.K. Metcalf</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="49">49</td>
+  <td data-order="19">19</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/ladd-mcconkey/124030">Ladd McConkey</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="50">50</td>
+  <td data-order="16">16</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/chuba-hubbard/57373">Chuba Hubbard</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="51">51</td>
+  <td data-order="20">20</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/dj-moore/48267">D.J. Moore</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="52">52</td>
+  <td data-order="21">21</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/khalil-shakir/84140">Khalil Shakir</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="53">53</td>
+  <td data-order="17">17</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kyle-monangai/129891">Kyle Monangai</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="54">54</td>
+  <td data-order="18">18</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kimani-vidal/123727">Kimani Vidal</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="55">55</td>
+  <td data-order="19">19</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/bhayshul-tuten/150568">Bhayshul Tuten</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="56">56</td>
+  <td data-order="20">20</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/ty-johnson/45769">Ty Johnson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="57">57</td>
+  <td data-order="22">22</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jauan-jennings/48027">Jauan Jennings</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="58">58</td>
+  <td data-order="4"> 4</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/colston-loveland/158540">Colston Loveland</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="59">59</td>
+  <td data-order="5"> 5</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/hunter-henry/10669">Hunter Henry</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="60">60</td>
+  <td data-order="21">21</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/emanuel-wilson/154173">Emanuel Wilson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="61">61</td>
+  <td data-order="22">22</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jawhar-jordan/99595">Jawhar Jordan</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="62">62</td>
+  <td data-order="6"> 6</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/colby-parkinson/52266">Colby Parkinson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="63">63</td>
+  <td data-order="23">23</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jalen-coker/143068">Jalen Coker</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="64">64</td>
+  <td data-order="24">24</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/brian-thomas-jr/146760">Brian Thomas Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="65">65</td>
+  <td data-order="25">25</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/keenan-allen/7857">Keenan Allen</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="66">66</td>
+  <td data-order="26">26</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/skyy-moore/97116">Skyy Moore</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="67">67</td>
+  <td data-order="23">23</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kyle-juszczyk/7912">Kyle Juszczyk</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="68">68</td>
+  <td data-order="27">27</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jayden-reed/78171">Jayden Reed</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="69">69</td>
+  <td data-order="24">24</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/tank-bigsby/123974">Tank Bigsby</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="70">70</td>
+  <td data-order="25">25</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/brian-robinson/57120">Brian Robinson Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="71">71</td>
+  <td data-order="28">28</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/kayshon-boutte/124087">Kayshon Boutte</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="72">72</td>
+  <td data-order="29">29</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/ricky-pearsall/100660">Ricky Pearsall</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="73">73</td>
+  <td data-order="26">26</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/dare-ogunbowale/12329">Dare Ogunbowale</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="74">74</td>
+  <td data-order="7"> 7</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/dalton-schultz/47304">Dalton Schultz</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="75">75</td>
+  <td data-order="27">27</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/ray-davis/101072">Ray Davis</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="76">76</td>
+  <td data-order="28">28</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/will-shipley/144138">Will Shipley</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="77">77</td>
+  <td data-order="29">29</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/chris-brooks/83644">Chris Brooks</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="78">78</td>
+  <td data-order="30">30</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/lequint-allen/158290">LeQuint Allen Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="79">79</td>
+  <td data-order="31">31</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/british-brooks/77714">British Brooks</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="80">80</td>
+  <td data-order="32">32</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/hassan-haskins/83701">Hassan Haskins</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="81">81</td>
+  <td data-order="33">33</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/reggie-gilliam/40951">Reggie Gilliam</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="82">82</td>
+  <td data-order="34">34</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/scott-matlock/82482">Scott Matlock</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="83">83</td>
+  <td data-order="35">35</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/trevor-etienne/157730">Trevor Etienne</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="84">84</td>
+  <td data-order="8"> 8</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/oronde-gadsden-ii/144046">Oronde Gadsden</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="85">85</td>
+  <td data-order="9"> 9</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/brenton-strange/101694">Brenton Strange</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="86">86</td>
+  <td data-order="10">10</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/tyler-higbee/10744">Tyler Higbee</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="87">87</td>
+  <td data-order="30">30</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/rome-odunze/73774">Rome Odunze</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="88">88</td>
+  <td data-order="31">31</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/efton-chism-iii/141521">Efton Chism III</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="89">89</td>
+  <td data-order="36">36</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jack-westover/84079">Jack Westover</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="90">90</td>
+  <td data-order="32">32</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/adam-thielen/8288">Adam Thielen</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="91">91</td>
+  <td data-order="33">33</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/joshua-palmer/62979">Joshua Palmer</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="92">92</td>
+  <td data-order="34">34</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/brandin-cooks/8655">Brandin Cooks</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="93">93</td>
+  <td data-order="37">37</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/ronnie-rivers/57208">Ronnie Rivers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="94">94</td>
+  <td data-order="11">11</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/pat-freiermuth/84085">Pat Freiermuth</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="95">95</td>
+  <td data-order="12">12</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/dawson-knox/35883">Dawson Knox</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="96">96</td>
+  <td data-order="38">38</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/dernest-johnson/45734">D'Ernest Johnson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="97">97</td>
+  <td data-order="13">13</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/luke-musgrave/98499">Luke Musgrave</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="98">98</td>
+  <td data-order="35">35</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/christian-kirk/47546">Christian Kirk</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="99">99</td>
+  <td data-order="36">36</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/tyrell-shavers/61107">Tyrell Shavers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="100">100</td>
+  <td data-order="37">37</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/xavier-legette/99197">Xavier Legette</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="101">101</td>
+  <td data-order="14">14</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/terrance-ferguson/146563">Terrance Ferguson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="102">102</td>
+  <td data-order="38">38</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/marquez-valdes-scantling/47809">Marquez Valdes-Scantling</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="103">103</td>
+  <td data-order="15">15</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/jonnu-smith/11855">Jonnu Smith</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="104">104</td>
+  <td data-order="39">39</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/demario-douglas/104155">DeMario Douglas</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="105">105</td>
+  <td data-order="40">40</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/dontayvion-wicks/99711">Dontayvion Wicks</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="106">106</td>
+  <td data-order="16">16</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/cole-kmet/60995">Cole Kmet</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="107">107</td>
+  <td data-order="39">39</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jordan-james/163295">Jordan James</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="108">108</td>
+  <td data-order="40">40</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kaleb-johnson/156419">Kaleb Johnson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="109">109</td>
+  <td data-order="41">41</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/gabe-davis/55410">Gabe Davis</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="110">110</td>
+  <td data-order="42">42</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/calvin-austin-iii/61418">Calvin Austin III</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="111">111</td>
+  <td data-order="41">41</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/travis-homer/45859">Travis Homer</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="112">112</td>
+  <td data-order="43">43</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/olamide-zaccheaus/44920">Olamide Zaccheaus</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="113">113</td>
+  <td data-order="44">44</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/keon-coleman/144949">Keon Coleman</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="114">114</td>
+  <td data-order="17">17</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/tommy-tremble/84025">Tommy Tremble</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="115">115</td>
+  <td data-order="45">45</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/xavier-smith/102585">Xavier Smith</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="116">116</td>
+  <td data-order="18">18</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/jackson-hawes/109374">Jackson Hawes</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="117">117</td>
+  <td data-order="46">46</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jaylin-noel/125155">Jaylin Noel</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="118">118</td>
+  <td data-order="47">47</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/tre-harris/122676">Tre' Harris</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="119">119</td>
+  <td data-order="48">48</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/matthew-golden/156165">Matthew Golden</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="120">120</td>
+  <td data-order="49">49</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jahan-dotson/84375">Jahan Dotson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="121">121</td>
+  <td data-order="50">50</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jimmy-horn-jr/144483">Jimmy Horn Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="122">122</td>
+  <td data-order="51">51</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/tim-patrick/12087">Tim Patrick</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="123">123</td>
+  <td data-order="19">19</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/davis-allen/99697">Davis Allen</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="124">124</td>
+  <td data-order="52">52</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/kyle-williams/128374">Kyle Williams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="125">125</td>
+  <td data-order="53">53</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/brycen-tremayne/84425">Brycen Tremayne</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="126">126</td>
+  <td data-order="20">20</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/jake-tonges/60864">Jake Tonges</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="127">127</td>
+  <td data-order="54">54</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/konata-mumpfield/145598">Konata Mumpfield</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="128">128</td>
+  <td data-order="55">55</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/tutu-atwell/77965">Tutu Atwell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="129">129</td>
+  <td data-order="56">56</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jahdae-walker/175944">Jahdae Walker</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="130">130</td>
+  <td data-order="57">57</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/ben-skowronek/27948">Ben Skowronek</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="131">131</td>
+  <td data-order="21">21</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/austin-hooper/10715">Austin Hooper</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="132">132</td>
+  <td data-order="58">58</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/bo-melton/61610">Bo Melton</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="133">133</td>
+  <td data-order="22">22</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/mitchell-evans/147486">Mitchell Evans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="134">134</td>
+  <td data-order="59">59</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/darius-cooper/136866">Darius Cooper</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="135">135</td>
+  <td data-order="60">60</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/dyami-brown/77986">Dyami Brown</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="136">136</td>
+  <td data-order="23">23</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/will-dissly/30762">Will Dissly</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="137">137</td>
+  <td data-order="61">61</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jordan-whittington/97623">Jordan Whittington</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="138">138</td>
+  <td data-order="24">24</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/connor-heyward/57301">Connor Heyward</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="139">139</td>
+  <td data-order="62">62</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/britain-covey/32933">Britain Covey</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="140">140</td>
+  <td data-order="63">63</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/devin-duvernay/40006">Devin Duvernay</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="141">141</td>
+  <td data-order="25">25</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/tyler-conklin/47124">Tyler Conklin</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="142">142</td>
+  <td data-order="26">26</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/josh-whyle/54037">Josh Whyle</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="143">143</td>
+  <td data-order="27">27</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/grant-calcaterra/60997">Grant Calcaterra</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="144">144</td>
+  <td data-order="28">28</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/cade-stover/101486">Cade Stover</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="145">145</td>
+  <td data-order="29">29</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/james-mitchell/77885">James Mitchell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="146">146</td>
+  <td data-order="30">30</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/kylen-granson/40630">Kylen Granson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="147">147</td>
+  <td data-order="31">31</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/cameron-latu/82647">Cameron Latu</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="148">148</td>
+  <td data-order="32">32</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/drake-dabney/122264">Drake Dabney</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="149">149</td>
+  <td data-order="33">33</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/durham-smythe/47257">Durham Smythe</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="150">150</td>
+  <td data-order="34">34</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/luke-farrell/42353">Luke Farrell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="151">151</td>
+  <td data-order="35">35</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/harrison-bryant/26394">Harrison Bryant</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="152">152</td>
+  <td data-order="36">36</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/quintin-morris/61182">Quintin Morris</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="153">153</td>
+  <td data-order="37">37</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/johnny-mundt/12206">Johnny Mundt</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="154">154</td>
+  <td data-order="38">38</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/cj-dippre/144888">C.J. Dippre</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="1"> 1</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/kaimi-fairbairn/11161">Ka'imi Fairbairn</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="2"> 2</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/cam-little/146646">Cam Little</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="3"> 3</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/harrison-mevis/124212">Harrison Mevis</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="4"> 4</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/eddy-pineiro/44140">Eddy Pineiro</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="5"> 5</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/cameron-dicker/77069">Cameron Dicker</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="6"> 6</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/andres-borregales/143934">Andy Borregales</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="7"> 7</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/cairo-santos/8932">Cairo Santos</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="8"> 8</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/brandon-mcmanus/8437">Brandon McManus</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="9"> 9</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/chris-boswell/8990">Chris Boswell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="10">10</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/ryan-fitzgerald/99867">Ryan Fitzgerald</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="11">11</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/matt-prater/3471">Matt Prater</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="12">12</td>
+  <td>K</td>
+  <td><a href="https://www.pff.com/nfl/players/jake-elliott/11908">Jake Elliott</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="1"> 1</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="3"> 3</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="6"> 6</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="4"> 4</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="2"> 2</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="12">12</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td data-order="1757031600">Thu 09/04 08:20 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="5"> 5</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="10">10</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="11">11</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="8"> 8</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+  <td data-order="1757264400">Sun 09/07 01:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="9"> 9</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/green-bay-packers/12">Packers</a></td>
+  <td data-order="1757116800">Fri 09/05 08:00 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <td data-order="9999"></td>
+  <td data-order="7"> 7</td>
+  <td>DEF</td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers DST</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+  <td data-order="1757275500">Sun 09/07 04:05 PM</td>
+  <td></td>
+  <td></td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+    function dtExportText(data){ try { return $("<div>").html(data).text().trim(); } catch(e){ return (data || "").toString().trim(); } }
+    $.fn.dataTable.ext.order["dom-data-order"] = function (settings, col) {
+      return this.api().column(col, {order:"index"}).nodes().map(function(td){
+        var v = $(td).data("order");
+        if (v === undefined || v === null || v === "") { v = $(td).text(); }
+        if ((v+"").trim() === "") return Number.POSITIVE_INFINITY;
+        var n = parseFloat(v);
+        return isNaN(n) ? Number.POSITIVE_INFINITY : n;
+      });
+    };
+    $.fn.dataTable.ext.type.order["opp-pre"] = function (d) {
+      var t = $("<div>").html(d).text().trim();
+      return t.replace(/^@/,"").toLowerCase();
+    };
+    function bucketFromEpoch(sec){
+      if (!sec || isNaN(sec)) return "";
+      var d = new Date(parseFloat(sec)*1000), tz = "America/New_York";
+      var wd = new Intl.DateTimeFormat("en-US",{weekday:"short",timeZone:tz}).format(d);
+      var hr = parseInt(new Intl.DateTimeFormat("en-US",{hour:"2-digit",hour12:false,timeZone:tz}).format(d),10);
+      if (wd==="Thu") return "Thu Night";
+      if (wd==="Fri") return "Fri";
+      if (wd==="Sat") return "Sat";
+      if (wd==="Sun"){ if (hr<=13) return "Sun Early"; if (hr>=15 && hr<=17) return "Sun Late"; if (hr>=19) return "Sun Night"; return "Sun Other"; }
+      if (wd==="Mon") return "Mon Night";
+      return wd;
+    }
+    function bucketOrderIndex(b){ var m={"Thu Night":1,"Fri":2,"Sat":3,"Sun Early":4,"Sun Late":5,"Sun Night":6,"Sun Other":7,"Mon Night":8}; return (b in m)?m[b]:999; }
+    $(document).ready(function() {
+      var table = $("#example").DataTable({
+        dom: "B t", autoWidth: false, order: [[0,"asc"],[1,"asc"]], orderCellsTop: true,
+        buttons: [
+          { extend: "copyHtml5",  
+title:"Weekly Fantasy Rankings 2025 Week 28",
+exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { extend: "csvHtml5",   
+title:"Weekly Fantasy Rankings 2025 Week 28",
+filename:"weekly_fantasy_rankings_2025_week_28",
+exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { extend: "excelHtml5", 
+title:"Weekly Fantasy Rankings 2025 Week 28",
+filename:"weekly_fantasy_rankings_2025_week_28",
+exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { extend: "print",      
+title:"Weekly Fantasy Rankings 2025 Week 28",
+messageTop:function(){var el=document.getElementById("last-updated-block");return el?el.textContent:"";}, exportOptions:{ columns:":visible", modifier:{search:"applied",order:"applied"}, format:{ body:dtExportText } } },
+          { text:"Reset Filters", action:function(){
+              $("[data-key='name']").val("");
+              selected.pos.clear(); selected.team.clear(); selected.opp.clear(); selected.inj.clear(); selected.stat.clear(); selected.start.clear();
+              $(".filter-dd input[type=checkbox]").prop("checked", false);
+              table.search("").columns().search(""); table.draw();
+              localStorage.removeItem(stateKey); window.history.replaceState(null,"",window.location.pathname);
+            }
+          }
+        ],
+        columnDefs: [ { targets:0, orderDataType:"dom-data-order" }, { targets:6, orderDataType:"dom-data-order" }, { targets:5, type:"opp" } ],
+        paging:false, ordering:true, info:false
+      });
+
+      /* Force all links to open in a new tab (bypass iframe blocking) */
+      function retargetLinks(){ $("#example a").attr("target","_blank").attr("rel","noopener noreferrer"); }
+      retargetLinks();
+      table.on("draw", retargetLinks);
+
+      var stateKey="DT_state_example";
+      var selected={ pos:new Set(), team:new Set(), opp:new Set(), start:new Set(), inj:new Set(), stat:new Set() };
+      function writeStateToURL(s){ var p=new URLSearchParams(); if(s.name)p.set("name",s.name); ["pos","team","opp","start","inj","stat"].forEach(function(k){ if(s[k]&&s[k].length)p.set(k,s[k].join("|")); }); var q=p.toString(); var url=q?(window.location.pathname+"?"+q):window.location.pathname; window.history.replaceState(null,"",url); }
+      function readStateFromURL(){ var p=new URLSearchParams(window.location.search); var s={}; if(p.has("name"))s.name=p.get("name"); ["pos","team","opp","start","inj","stat"].forEach(function(k){ if(p.has(k))s[k]=p.get(k).split("|").filter(Boolean); }); return s; }
+      function writeStateToStorage(s){ try{ localStorage.setItem(stateKey, JSON.stringify(s||{})); }catch(e){} }
+      function readStateFromStorage(){ try{ return JSON.parse(localStorage.getItem(stateKey)||"{}")||{}; }catch(e){ return {}; } }
+      function currentState(){ return { name:($("[data-key='name']").val()||"").trim(), pos:Array.from(selected.pos), team:Array.from(selected.team), opp:Array.from(selected.opp), start:Array.from(selected.start), inj:Array.from(selected.inj), stat:Array.from(selected.stat) }; }
+      function persist(){ var s=currentState(); writeStateToStorage(s); writeStateToURL(s); }
+      function applyFilters(){
+        table.column(3).search(($("[data-key='name']").val()||""));
+        table.column(2).search(Array.from(selected.pos).map(escapeRegex).join("|"), true, false);
+        table.column(4).search(Array.from(selected.team).map(escapeRegex).join("|"), true, false);
+        table.column(7).search(Array.from(selected.inj).map(escapeRegex).join("|"), true, false);
+        table.column(8).search(Array.from(selected.stat).map(escapeRegex).join("|"), true, false);
+        table.draw(); persist();
+      }
+      /* Custom filters for Start buckets and Opponent (ignoring "@") */
+      $.fn.dataTable.ext.search.push(function(settings, data, dataIndex){
+        if (settings.nTable !== document.getElementById("example")) return true;
+        if (selected.start.size){
+          var tdS = table.column(6).nodes()[dataIndex]; var sec=$(tdS).data("order");
+          if (sec!==undefined && sec!==null && sec!==""){ var b=bucketFromEpoch(sec); if(!selected.start.has(b)) return false; }
+        }
+        if (selected.opp.size){
+          var tdO = table.column(5).nodes()[dataIndex];
+          var txt = $(tdO).text().trim().replace(/^@/,"").toLowerCase();
+          var ok=false; selected.opp.forEach(function(v){ if(v.toLowerCase()===txt) ok=true; });
+          if(!ok) return false;
+        }
+        return true;
+      });
+      function collectTextsForColumn(idx, normalize){
+        var texts = table.column(idx).data().map(function(d){ return $("<div>").html(d).text(); }).toArray();
+        var seen={}; var out=[]; texts.forEach(function(t){ if(!t) return; var v=normalize?normalize(t):t; v=v.trim(); if(!v||seen[v]) return; seen[v]=1; out.push(v); }); return out;
+      }
+      function buildCheckboxDropdown(colIndex, idBtn, idMenu, values, sortFn){
+        var wrap=$('<div class="dropdown filter-dd"></div>');
+        var btn =$('<button id="'+idBtn+'" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Filter</button>');
+        var menu=$('<div id="'+idMenu+'" class="dropdown-menu p-2"></div>');
+        var vals=values||[]; if (sortFn) vals.sort(sortFn); else vals.sort();
+        vals.forEach(function(v){ var safe=v.replace(/\s+/g,"_"); var row=$('<div class="form-check"></div>'); var cb=$('<input class="form-check-input" type="checkbox" id="'+idMenu+'_'+safe+'" value="'+v+'">'); var lb=$('<label class="form-check-label" for="'+idMenu+'_'+safe+'">'+v+'</label>'); row.append(cb).append(lb); menu.append(row); });
+        wrap.append(btn).append(menu); $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
+        menu.on("change","input[type=checkbox]", function(){
+          var arr=menu.find("input:checked").map(function(){return this.value;}).get();
+          if(idBtn==="btn-pos"){ selected.pos=new Set(arr); }
+          else if(idBtn==="btn-team"){ selected.team=new Set(arr); }
+          else if(idBtn==="btn-opp"){ selected.opp=new Set(arr); }
+          else if(idBtn==="btn-inj"){ selected.inj=new Set(arr); }
+          else if(idBtn==="btn-stat"){ selected.stat=new Set(arr); }
+          applyFilters();
+        });
+      }
+      function buildStartDropdown(colIndex){
+        var nodes=table.column(colIndex).nodes(); var seen={}; var buckets=[];
+        nodes.each(function(td){ var sec=$(td).data("order"); var b=bucketFromEpoch(sec); if(!b||seen[b]) return; seen[b]=1; buckets.push(b); });
+        buckets.sort(function(a,b){ return bucketOrderIndex(a)-bucketOrderIndex(b); });
+        var wrap=$('<div class="dropdown filter-dd"></div>');
+        var btn =$('<button id="btn-start" class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Filter</button>');
+        var menu=$('<div id="menu-start" class="dropdown-menu p-2"></div>');
+        buckets.forEach(function(v){ var safe=v.replace(/\s+/g,"_"); var row=$('<div class="form-check"></div>'); var cb=$('<input class="form-check-input" type="checkbox" id="menu-start_'+safe+'" value="'+v+'">'); var lb=$('<label class="form-check-label" for="menu-start_'+safe+'">'+v+'</label>'); row.append(cb).append(lb); menu.append(row); });
+        wrap.append(btn).append(menu); $("#example thead tr.filter-row th").eq(colIndex).empty().append(wrap);
+        menu.on("change","input[type=checkbox]", function(){
+          var arr=menu.find("input:checked").map(function(){return this.value;}).get(); selected.start=new Set(arr); table.draw(); persist();
+        });
+      }
+      $("[data-key='name']").on("keyup change", function(){ applyFilters(); });
+      buildCheckboxDropdown(2,"btn-pos","menu-pos",collectTextsForColumn(2));
+      buildCheckboxDropdown(4,"btn-team","menu-team",collectTextsForColumn(4));
+      buildCheckboxDropdown(5,"btn-opp","menu-opp",collectTextsForColumn(5,function(x){return x.replace(/^@/,"");}), function(a,b){ a=a.toLowerCase(); b=b.toLowerCase(); return a<b?-1:a>b?1:0; });
+      buildStartDropdown(6);
+      buildCheckboxDropdown(7,"btn-inj","menu-inj",collectTextsForColumn(7));
+      buildCheckboxDropdown(8,"btn-stat","menu-stat",collectTextsForColumn(8));
+      function restoreState(s){
+        if(s.name){ $("[data-key='name']").val(s.name); }
+        ["pos","team","opp","inj","stat"].forEach(function(k){ if(Array.isArray(s[k])&&s[k].length){ s[k].forEach(function(v){ $("#menu-"+k+" input[value=\""+v+"\"]").prop("checked",true); }); selected[k]=new Set(s[k]); } });
+        if(Array.isArray(s.start)&&s.start.length){ s.start.forEach(function(v){ $("#menu-start input[value=\""+v+"\"]").prop("checked",true); }); selected.start=new Set(s.start); }
+        applyFilters();
+      }
+      var s=Object.assign({}, readStateFromStorage(), readStateFromURL()); restoreState(s);
+    });
+  </script>
+</body>
+</html>
