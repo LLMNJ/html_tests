@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PFF dynasty_rookie_superflex Cheat Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
+  <style>
+    #pff-cheat-sheet-table, #pff-cheat-sheet-table table { font-family: 'Archivo', sans-serif; }
+    #pff-cheat-sheet-table .table-responsive { overflow: visible; }
+    #pff-cheat-sheet-table .dt-buttons { display: inline-flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    #pff-cheat-sheet-table .dt-buttons .btn { width: auto !important; display: inline-block; padding: 0.35rem 0.75rem; font-size: 0.875rem; }
+    #pff-cheat-sheet-table .desktop-btn-label { display: inline; }
+    #pff-cheat-sheet-table .mobile-btn-label { display: none; }
+    #pff-cheat-sheet-table #example th, #pff-cheat-sheet-table #example td { text-align: center; }
+    #pff-cheat-sheet-table #example thead th {
+      position: sticky;
+      top: 0;
+      background-color: #f8f9fa;
+      z-index: 2;
+    }
+    #pff-cheat-sheet-table #example thead tr.filter-row th {
+      top: 38px;
+      z-index: 1;
+    }
+    #pff-cheat-sheet-table #example .filter-row input, #pff-cheat-sheet-table #example .filter-row select { width: 100%; box-sizing: border-box; text-align: center; }
+    #pff-cheat-sheet-table #example a { color: #0d6efd; text-decoration: none; }
+    #pff-cheat-sheet-table #example a:hover { text-decoration: underline; }
+    #pff-cheat-sheet-table .dataTables_filter { display: none; }
+    #pff-cheat-sheet-table .desktop-label { display: inline; }
+    #pff-cheat-sheet-table .mobile-label { display: none; }
+    @media (max-width: 576px) {
+      #pff-cheat-sheet-table .dt-buttons { gap: 4px; margin-bottom: 8px; }
+      #pff-cheat-sheet-table .dt-buttons .btn { padding: 0.25rem 0.45rem; font-size: 0.75rem; }
+      #pff-cheat-sheet-table .desktop-btn-label { display: none; }
+      #pff-cheat-sheet-table .mobile-btn-label { display: inline; }
+      #pff-cheat-sheet-table #example { table-layout: fixed; width: 100%; }
+      #pff-cheat-sheet-table #example th, #pff-cheat-sheet-table #example td { font-size: 12px; padding: 2px; }
+      #pff-cheat-sheet-table #example th:nth-child(1), #pff-cheat-sheet-table #example td:nth-child(1) {
+        width: 8%; max-width: 30px; white-space: nowrap; text-align: left; padding-right: 12px;
+      }
+      #pff-cheat-sheet-table #example th:nth-child(2), #pff-cheat-sheet-table #example td:nth-child(2) {
+        width: 10%; max-width: 35px; white-space: nowrap; text-align: left; padding-right: 12px;
+      }
+      #pff-cheat-sheet-table #example th:nth-child(3), #pff-cheat-sheet-table #example td:nth-child(3) {
+        width: 35%; max-width: 100px; word-wrap: break-word; white-space: normal;
+      }
+      #pff-cheat-sheet-table #example th:nth-child(4), #pff-cheat-sheet-table #example td:nth-child(4) {
+        width: 30%; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      #pff-cheat-sheet-table .desktop-label { display: none; }
+      #pff-cheat-sheet-table .mobile-label { display: inline; }
+    }
+    @media print {
+      #pff-cheat-sheet-table .dt-buttons, #pff-cheat-sheet-table #example thead tr.filter-row { display: none !important; }
+      body { padding: 0 !important; }
+      #pff-cheat-sheet-table #example { table-layout: fixed; width: 100%; }
+      #pff-cheat-sheet-table #example th, #pff-cheat-sheet-table #example td { font-size: 6pt; line-height: 1.02; padding: 1px 2px; }
+      #pff-cheat-sheet-table #example a { color: #000; text-decoration: none; }
+    }
+  </style>
+</head>
+<body class="p-4">
+  <div id="pff-cheat-sheet-table">
+    <div class="table-responsive">
+      <table id="example" class="table table-striped table-hover">
+        <thead class="table-light">
+          <tr>
+            <th><span class="desktop-label">Rank</span><span class="mobile-label">Rk.</span></th>
+            <th><span class="desktop-label">Position</span><span class="mobile-label">Pos.</span></th>
+            <th>Name</th>
+            <th>Team</th>
+          </tr>
+          <tr class="filter-row">
+            <th></th>
+            <th></th>
+            <th><input type="text" class="form-control form-control-sm text-center" placeholder="Filter"></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+<tr>
+  <td>1</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jeremiyah-love/171090">Jeremiyah Love</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/arizona-cardinals/1">Cardinals</a></td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/fernando-mendoza/158323">Fernando Mendoza</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/las-vegas-raiders/23">Raiders</a></td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/carnell-tate/170273">Carnell Tate</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/tennessee-titans/31">Titans</a></td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/makai-lemon/174150">Makai Lemon</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/jordyn-tyson/157690">Jordyn Tyson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-orleans-saints/20">Saints</a></td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jadarian-price/156985">Jadarian Price</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/seattle-seahawks/29">Seahawks</a></td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/kc-concepcion/170362">KC Concepcion</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/cleveland-browns/8">Browns</a></td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/ty-simpson/157008">Ty Simpson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/denzel-boston/162481">Denzel Boston</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/cleveland-browns/8">Browns</a></td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/de'zhaun-stribling/146508">De'Zhaun Stribling</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/kenyon-sadiq/174132">Kenyon Sadiq</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-york-jets/22">Jets</a></td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/omar-cooper-jr./156395">Omar Cooper Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-york-jets/22">Jets</a></td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/jonah-coleman/158717">Jonah Coleman</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/denver-broncos/10">Broncos</a></td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/ja'kobi-lane/176638">Ja'Kobi Lane</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
+</tr>
+<tr>
+  <td>15</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/mike-washington-jr./145672">Mike Washington Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/las-vegas-raiders/23">Raiders</a></td>
+</tr>
+<tr>
+  <td>16</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kaelon-black/138448">Kaelon Black</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/san-francisco-49ers/28">49ers</a></td>
+</tr>
+<tr>
+  <td>17</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/eli-stowers/147013">Eli Stowers</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+</tr>
+<tr>
+  <td>18</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/carson-beck/124010">Carson Beck</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/arizona-cardinals/1">Cardinals</a></td>
+</tr>
+<tr>
+  <td>19</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/malachi-fields/151069">Malachi Fields</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-york-giants/21">Giants</a></td>
+</tr>
+<tr>
+  <td>20</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/caleb-douglas/157740">Caleb Douglas</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/miami-dolphins/17">Dolphins</a></td>
+</tr>
+<tr>
+  <td>21</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/germie-bernard/158374">Germie Bernard</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+</tr>
+<tr>
+  <td>22</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/chris-bell/156321">Chris Bell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/miami-dolphins/17">Dolphins</a></td>
+</tr>
+<tr>
+  <td>23</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/ted-hurst/187922">Ted Hurst III</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/tampa-bay-buccaneers/30">Buccaneers</a></td>
+</tr>
+<tr>
+  <td>24</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/emmett-johnson/156473">Emmett Johnson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/kansas-city-chiefs/16">Chiefs</a></td>
+</tr>
+<tr>
+  <td>25</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/zachariah-branch/174142">Zachariah Branch</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/atlanta-falcons/2">Falcons</a></td>
+</tr>
+<tr>
+  <td>26</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/cyrus-allen/156582">Cyrus Allen</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/kansas-city-chiefs/16">Chiefs</a></td>
+</tr>
+<tr>
+  <td>27</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/kaytron-allen/164158">Kaytron Allen</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/washington-commanders/32">Commanders</a></td>
+</tr>
+<tr>
+  <td>28</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/nicholas-singleton/164188">Nicholas Singleton</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/tennessee-titans/31">Titans</a></td>
+</tr>
+<tr>
+  <td>29</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/antonio-williams/156241">Antonio Williams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/washington-commanders/32">Commanders</a></td>
+</tr>
+<tr>
+  <td>30</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/demond-claiborne/157523">Demond Claiborne</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/minnesota-vikings/18">Vikings</a></td>
+</tr>
+<tr>
+  <td>31</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/drew-allar/164157">Drew Allar</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/pittsburgh-steelers/25">Steelers</a></td>
+</tr>
+<tr>
+  <td>32</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/seth-mcgowan/122936">Seth McGowan</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/indianapolis-colts/14">Colts</a></td>
+</tr>
+<tr>
+  <td>33</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/bryce-lance/148151">Bryce Lance</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-orleans-saints/20">Saints</a></td>
+</tr>
+<tr>
+  <td>34</td>
+  <td>RB</td>
+  <td><a href="https://www.pff.com/nfl/players/adam-randall/156252">Adam Randall</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
+</tr>
+<tr>
+  <td>35</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/eli-raridon/156970">Eli Raridon</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+</tr>
+<tr>
+  <td>36</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/elijah-sarratt/159499">Elijah Sarratt</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/baltimore-ravens/3">Ravens</a></td>
+</tr>
+<tr>
+  <td>37</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/colbie-young/162739">Colbie Young</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/cincinnati-bengals/7">Bengals</a></td>
+</tr>
+<tr>
+  <td>38</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/brenen-thompson/163865">Brenen Thompson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-chargers/27">Chargers</a></td>
+</tr>
+<tr>
+  <td>39</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/cade-klubnik/156253">Cade Klubnik</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-york-jets/22">Jets</a></td>
+</tr>
+<tr>
+  <td>40</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/zavion-thomas/163697">Zavion Thomas</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+</tr>
+<tr>
+  <td>41</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/max-klare/162884">Max Klare</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/los-angeles-rams/26">Rams</a></td>
+</tr>
+<tr>
+  <td>42</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/chris-brazzell-ii/158409">Chris Brazzell II</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/carolina-panthers/5">Panthers</a></td>
+</tr>
+<tr>
+  <td>43</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/malik-benson/169698">Malik Benson</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/las-vegas-raiders/23">Raiders</a></td>
+</tr>
+<tr>
+  <td>44</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/oscar-delp/157080">Oscar Delp</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-orleans-saints/20">Saints</a></td>
+</tr>
+<tr>
+  <td>45</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/marlin-klein/162818">Marlin Klein</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/houston-texans/13">Texans</a></td>
+</tr>
+<tr>
+  <td>46</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/will-kacmarek/145896">Will Kacmarek</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/miami-dolphins/17">Dolphins</a></td>
+</tr>
+<tr>
+  <td>47</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/cole-payton/148154">Cole Payton</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/philadelphia-eagles/24">Eagles</a></td>
+</tr>
+<tr>
+  <td>48</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/taylen-green/145996">Taylen Green</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/cleveland-browns/8">Browns</a></td>
+</tr>
+<tr>
+  <td>49</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/garrett-nussmeier/146757">Garrett Nussmeier</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/kansas-city-chiefs/16">Chiefs</a></td>
+</tr>
+<tr>
+  <td>50</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/skyler-bell/145163">Skyler Bell</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/buffalo-bills/4">Bills</a></td>
+</tr>
+<tr>
+  <td>51</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/justin-joly/158620">Justin Joly</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/denver-broncos/10">Broncos</a></td>
+</tr>
+<tr>
+  <td>52</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/barion-brown/163779">Barion Brown</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-orleans-saints/20">Saints</a></td>
+</tr>
+<tr>
+  <td>53</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/josh-cameron/144513">Josh Cameron</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+</tr>
+<tr>
+  <td>54</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/tanner-koziol/156895">Tanner Koziol</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+</tr>
+<tr>
+  <td>55</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/kevin-coleman-jr./160756">Kevin Coleman Jr.</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/miami-dolphins/17">Dolphins</a></td>
+</tr>
+<tr>
+  <td>56</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/nate-boerkircher/129676">Nate Boerkircher</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+</tr>
+<tr>
+  <td>57</td>
+  <td>WR</td>
+  <td><a href="https://www.pff.com/nfl/players/cj-williams/158471">CJ Williams</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/jacksonville-jaguars/15">Jaguars</a></td>
+</tr>
+<tr>
+  <td>58</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/athan-kaliakmanis/144971">Athan Kaliakmanis</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/washington-commanders/32">Commanders</a></td>
+</tr>
+<tr>
+  <td>59</td>
+  <td>QB</td>
+  <td><a href="https://www.pff.com/nfl/players/behren-morton/144747">Behren Morton</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/new-england-patriots/19">Patriots</a></td>
+</tr>
+<tr>
+  <td>60</td>
+  <td>TE</td>
+  <td><a href="https://www.pff.com/nfl/players/sam-roush/157270">Sam Roush</a></td>
+  <td><a href="https://www.pff.com/nfl/teams/chicago-bears/6">Bears</a></td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+  <script>
+    $(document).ready(function() {
+
+      function dtExportText(data) {
+        try {
+          return $("<div>").html(data).text().trim();
+        } catch(e) {
+          return (data || "").toString().trim();
+        }
+      }
+
+      function dtExportHeader(data, columnIdx, node) {
+        var desktopLabel = $(node).find(".desktop-label").text();
+        return desktopLabel || $(node).text().trim();
+      }
+
+      var table = $("#example").DataTable({
+        dom: "B t",
+        autoWidth: false,
+        columnDefs: [
+          { targets: 0, width: "8%" },
+          { targets: 1, width: "10%" },
+          { targets: 2, width: "35%" },
+          { targets: 3, width: "30%" }
+        ],
+        buttons: [
+          {
+            extend: "copyHtml5",
+            text: "<span class=\"desktop-btn-label\">Copy</span><span class=\"mobile-btn-label\">Copy</span>",
+            title: "PFF dynasty_rookie_superflex Cheat Sheet",
+            exportOptions: {
+              columns: ":visible",
+              modifier: { search: "applied", order: "applied" },
+              format: { header: dtExportHeader, body: dtExportText }
+            }
+          },
+          {
+            extend: "csvHtml5",
+            text: "<span class=\"desktop-btn-label\">Download CSV</span><span class=\"mobile-btn-label\">CSV</span>",
+            filename: "pff_dynasty_rookie_superflex_cheat_sheet",
+            exportOptions: {
+              columns: ":visible",
+              modifier: { search: "applied", order: "applied" },
+              format: { header: dtExportHeader, body: dtExportText }
+            }
+          },
+          {
+            extend: "excelHtml5",
+            text: "<span class=\"desktop-btn-label\">Download Excel</span><span class=\"mobile-btn-label\">Excel</span>",
+            filename: "pff_dynasty_rookie_superflex_cheat_sheet",
+            title: "PFF dynasty_rookie_superflex Cheat Sheet",
+            exportOptions: {
+              columns: ":visible",
+              modifier: { search: "applied", order: "applied" },
+              format: { header: dtExportHeader, body: dtExportText }
+            }
+          },
+          {
+            extend: "print",
+            text: "<span class=\"desktop-btn-label\">Print</span><span class=\"mobile-btn-label\">Print</span>",
+            title: "",
+            exportOptions: {
+              columns: ":visible",
+              modifier: { search: "applied", order: "applied" },
+              format: { header: dtExportHeader, body: dtExportText }
+            },
+            customize: function(win) {
+              var printTitle = "PFF dynasty_rookie_superflex Cheat Sheet";
+              win.document.title = printTitle;
+              var columnsPerPage = 3;
+              var rowsPerColumn = 85;
+              var rowsPerPage = columnsPerPage * rowsPerColumn;
+              var $body = $(win.document.body);
+              var $originalTable = $body.find("table").first();
+
+              function escapeHtml(x) {
+                return $("<div>").text(x == null ? "" : x).html();
+              }
+
+              var headers = [];
+              $originalTable.find("thead tr").first().find("th").each(function(i) {
+                if (i === 0) headers.push("Rank");
+                else if (i === 1) headers.push("Pos");
+                else headers.push($(this).text().trim());
+              });
+
+              var rows = [];
+              $originalTable.find("tbody tr").each(function() {
+                var row = [];
+                $(this).find("td").each(function() {
+                  row.push($(this).text().trim());
+                });
+                if (row.length) rows.push(row);
+              });
+
+              function makeMiniTable(headers, rowsChunk) {
+                if (!rowsChunk.length) return "<div class=\"print-column empty-column\"></div>";
+                var html = "<div class=\"print-column\"><table class=\"print-mini-table\"><thead><tr>";
+                headers.forEach(function(h) { html += "<th>" + escapeHtml(h) + "</th>"; });
+                html += "</tr></thead><tbody>";
+                rowsChunk.forEach(function(row) {
+                  html += "<tr>";
+                  row.forEach(function(cell) { html += "<td>" + escapeHtml(cell) + "</td>"; });
+                  html += "</tr>";
+                });
+                html += "</tbody></table></div>";
+                return html;
+              }
+
+              var html = "";
+
+              for (var i = 0; i < rows.length; i += rowsPerPage) {
+                html += "<div class=\"print-page-wrapper\">";
+                html += "<div class=\"print-title\">" + escapeHtml(printTitle) + "</div>";
+                html += "<div class=\"print-page\">";
+                for (var c = 0; c < columnsPerPage; c++) {
+                  var start = i + c * rowsPerColumn;
+                  var end = start + rowsPerColumn;
+                  html += makeMiniTable(headers, rows.slice(start, end));
+                }
+                html += "</div>";
+                html += "</div>";
+              }
+
+              $body.html(html);
+
+              $(win.document.head).append(
+                "<style>" +
+                "@page { size: portrait; margin: 0.12in; }" +
+                "body { font-family: Archivo, Arial, sans-serif; margin: 0; color: #000; }" +
+                ".print-title { font-size: 11pt; font-weight: 700; text-align: center; margin-bottom: 5px; }" +
+                ".print-page-wrapper { page-break-after: always; break-after: page; }" +
+                ".print-page-wrapper:last-child { page-break-after: auto; break-after: auto; }" +
+                ".print-page { display: flex; gap: 8px; width: 100%; align-items: flex-start; }" +
+                ".print-column { width: 33.333%; }" +
+                ".empty-column { display: block; }" +
+                ".print-mini-table { width: 100%; border-collapse: collapse; table-layout: fixed; }" +
+                ".print-mini-table th, .print-mini-table td { font-size: 7.2pt; line-height: 1.03; padding: 0.4px 0.65px; border-bottom: 0.2px solid #ddd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }" +
+                ".print-mini-table th { font-weight: 700; border-bottom: 0.5px solid #999; text-align: center; }" +
+                ".print-mini-table th:nth-child(1), .print-mini-table td:nth-child(1) { width: 12%; text-align: center; }" +
+                ".print-mini-table th:nth-child(2), .print-mini-table td:nth-child(2) { width: 12%; text-align: center; }" +
+                ".print-mini-table th:nth-child(3), .print-mini-table td:nth-child(3) { width: 47%; text-align: left; }" +
+                ".print-mini-table th:nth-child(4), .print-mini-table td:nth-child(4) { width: 29%; text-align: left; }" +
+                "</style>"
+              );
+            }
+          },
+          {
+            text: "<span class=\"desktop-btn-label\">Clear Filters</span><span class=\"mobile-btn-label\">Clear</span>",
+            action: function() {
+              $("#pff-cheat-sheet-table .filter-row input").val("");
+              $("#pff-cheat-sheet-table .filter-row select").val("");
+              table.search("").columns().search("");
+              table.draw();
+            }
+          }
+        ],
+        paging: false,
+        ordering: true,
+        info: false,
+        orderCellsTop: true
+      });
+
+      // Open player/team links in a new tab
+      function retargetLinks() {
+        $("#pff-cheat-sheet-table #example a").attr("target", "_blank").attr("rel", "noopener noreferrer");
+      }
+      retargetLinks();
+      table.on("draw", retargetLinks);
+
+      // Prevent clicks inside filter controls from triggering column sorting
+      $("#pff-cheat-sheet-table #example thead tr.filter-row").on("click", "input, select", function(e) {
+        e.stopPropagation();
+      });
+
+      // name filter input (column 2)
+      $("#pff-cheat-sheet-table .filter-row input").on("keyup change", function() {
+        table.column(2).search(this.value).draw();
+      });
+
+      // dropdowns for position and team
+      function addDropdown(colIndex, placeholder) {
+        var col = table.column(colIndex);
+        var vals = col.data().map(function(d) { return $("<div>").html(d).text(); }).toArray();
+        vals = Array.from(new Set(vals)).sort();
+        var sel = $("<select class=\"form-select form-select-sm text-center\"></select>");
+        sel.append($("<option>").val("").text(placeholder));
+        $.each(vals, function(_, v) { sel.append($("<option>").val(v).text(v)); });
+        sel.on("change", function() {
+          col.search(this.value ? "^" + this.value + "$" : "", true, false).draw();
+        });
+        $("#pff-cheat-sheet-table #example .filter-row th").eq(colIndex).append(sel);
+      }
+
+      addDropdown(1, "Filter");
+      addDropdown(3, "Filter");
+    });
+  </script>
+</body>
+</html>
