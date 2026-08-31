@@ -191,16 +191,31 @@
 
       buildPositionOptions(DATA.defaultPosition);
 
-      // Filter, sort, re-rank and cut to the configured depth.
+      // Sort and rank against the whole "All Positions" universe, cut to the
+      // configured depth, then narrow to the selected position group. That
+      // makes a position view a subset of the All view instead of its own
+      // separate list. Groups outside the All universe (K, DEF) rank alone.
       function buildRows() {
         var lg = currentLeague();
         var grp = currentGroup();
+        var groups = groupsForLeague(lg);
         var members = asArray(grp.members);
+
+        var allMembers = members;
+        for (var g = 0; g < groups.length; g++) {
+          if (groups[g].id === "All") allMembers = asArray(groups[g].members);
+        }
+        var nested = true;
+        for (var m = 0; m < members.length; m++) {
+          if (allMembers.indexOf(members[m]) === -1) nested = false;
+        }
+        var universe = nested ? allMembers : members;
+
         var col = lg.column;
         var limit = Math.min(lg.count, grp.count);
 
         var rows = DATA.pools[lg.pool].filter(function(p) {
-          return p[col] !== null && p[col] !== undefined && members.indexOf(p.position) !== -1;
+          return p[col] !== null && p[col] !== undefined && universe.indexOf(p.position) !== -1;
         });
 
         rows.sort(function(a, b) { return a[col] - b[col]; });
@@ -214,6 +229,7 @@
             lastValue = rows[i][col];
           }
           if (rank > limit) break;
+          if (members.indexOf(rows[i].position) === -1) continue;
           out.push({ rank: rank, player: rows[i] });
         }
         return out;
